@@ -1,81 +1,51 @@
-use home::home_dir;
-use sqlite::open;
-use std::{
-    fs::create_dir_all,
-    io::{stdin, Result},
-    time::{SystemTime, UNIX_EPOCH},
-};
+use rayon::prelude::*;
 
-fn main() {
-    create_table();
-    println!("Current Unix time -> {}", current_time());
-    ask_confirmation("Do you want to insert a new record?");
-    println!("Config path -> {}", config_app_folder());
-    database_path();
-    println!("Unix week -> {}", unix_week());
+#[derive(Debug)]
+enum Teste {
+    A,
+    B(i32),
+    C { x: i32, y: i32 },
 }
 
-fn unix_week() -> i32 {
-    return 1209600;
+struct Teste2 {
+    a: Teste,
 }
 
-fn current_time() -> u64 {
-    let time = SystemTime::now()
-        .duration_since(UNIX_EPOCH)
-        .unwrap()
-        .as_secs();
-    return time;
-}
+fn main () {
+    let mut count = 0;
+    let vec = vec![1, 2, 3, 5, 6, 7, 8, 9, 10];
+    let teste: Vec<i32> = vec.par_iter().map(|&i| ten_times(i) ).collect();
 
-fn ask_confirmation(text: &str) -> bool {
-    let mut confirmation = String::new();
-    println!("{} (y/N)", text);
-    stdin().read_line(&mut confirmation).unwrap();
-    if confirmation.trim().to_ascii_lowercase().starts_with("y") {
-        return true;
-    } else {
-        return false;
+    println!("{:?}", teste);
+    
+    // Testing Enums and Enum Structs
+    let a = Teste::B(1);
+    let b = Teste::C{x: 10, y:11};
+    let c = Teste2 { a: Teste::C{x: 10, y:11} };
+    if let Teste::B(x) = a {
+        println!("{}", x);
+    }
+    if let Teste::C{x, y} = b {
+        println!("{}", x);
+        println!("{}", y);
+    }
+    println!("{:?}", b);
+    println!("{:?}", c.a);
+
+    let add = |x: i32, y: i32| x + y;
+
+    println!("{}", add(1, 2));
+    loop {
+        println!("Before -> {}", count);
+        count += 1;
+        if count == 5 {
+            assert_eq!(count, 5);
+            break;
+        }
+        println!("After -> {}", count);
     }
 }
 
-fn database_path() -> String {
-    return [&config_app_folder(), "test.db"].join("");
-}
-
-fn create_config_app_folder() -> Result<()> {
-    create_dir_all(config_app_folder())?;
-    Ok(())
-}
-
-fn open_connection() -> sqlite::Connection {
-    let folder = create_config_app_folder();
-    if let Err(e) = folder {
-        println!("{}", e);
-    };
-    return open(database_path()).unwrap();
-}
-
-fn config_app_folder() -> String {
-    let path = match home_dir() {
-        Some(path) => path.display().to_string(),
-        None => "".to_string(),
-    };
-    return path + "/.config/transfer-sh-helper-database/";
-}
-
-fn create_table() {
-    let connection = open_connection();
-    connection
-        .execute(
-            "
-        CREATE TABLE IF NOT EXISTS transfer_data (
-        'id'	INTEGER,
-        'name'	TEXT,
-        'link'	TEXT,
-        'deleteLink'	TEXT,
-        'unixTime'	INTEGER,
-        PRIMARY KEY('id' AUTOINCREMENT));
-        ",
-        )
-        .unwrap();
+fn ten_times(value: i32) -> i32 {
+    value * 10
 }
