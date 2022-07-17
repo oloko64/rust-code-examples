@@ -63,3 +63,12 @@ pub fn optional() -> Option<String> {
         None
     }
 }
+
+pub fn borrow() {
+    let s = vec![1, 2, 3, 4];
+    let f = String::from("teste");
+
+    let iter: Vec<i32> = s.into_iter().filter(|x| x == &1).collect();
+
+    println!("{:?}", iter);
+}
