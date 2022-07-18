@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use std::collections::HashSet;
+use std::fs::read_to_string;
 
 pub fn hashmaps() {
     // Type inference lets us omit an explicit type signature (which
@@ -35,5 +36,12 @@ pub fn hashmaps() {
 
     // Print all reviews.
     println!("{:?}", book_reviews);
+    let teste = || -> String {
+        read_to_string("src/main.rs").unwrap_or_else(|err| {
+            println!("Error: {}", err);
+            String::new()
+        })
+    };
+    println!("{}", teste());
     println!("{}", book_reviews.get("Adventures of Huckleberry Finns").unwrap_or(&"Nothing found".to_string()));
 }
