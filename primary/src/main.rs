@@ -1,5 +1,7 @@
 mod random;
 mod conversions;
+mod concurrency;
+mod hashmaps;
 
 struct Car {
     name: String,
@@ -26,9 +28,12 @@ fn main () {
     // conversions::to_json();
     random::borrow();
 
-    let test = Box::from(3);
+    let _test = Box::from(3);
 
     let car = Car::new("Ferrari".to_string(), 2019);
 
     println!("{:#?}", car.name);
+
+    concurrency::threads();
+    hashmaps::hashmaps();
 }
