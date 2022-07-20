@@ -1,3 +1,5 @@
+use unicode_segmentation::UnicodeSegmentation;
+
 mod random;
 mod conversions;
 mod concurrency;
@@ -34,6 +36,19 @@ fn main () {
 
     println!("{:#?}", car.name);
 
-    concurrency::threads();
-    hashmaps::hashmaps();
+    // concurrency::threads();
+    // hashmaps::hashmaps();
+    iterate_strings();
+}
+
+
+fn iterate_strings() {
+    // Not the correct way as may be errors depending on the char
+    for c in "abcdefgã".chars() {
+        println!("{}", c);
+    }
+
+    for c2 in "abcdefgã".graphemes(true) {
+        println!("{}", c2);
+    }
 }
