@@ -1,9 +1,11 @@
+use types::User;
 use unicode_segmentation::UnicodeSegmentation;
 
 mod random;
 mod conversions;
 mod concurrency;
 mod hashmaps;
+mod types;
 
 struct Car {
     name: String,
@@ -38,7 +40,11 @@ fn main () {
 
     // concurrency::threads();
     // hashmaps::hashmaps();
-    iterate_strings();
+    // iterate_strings();
+    if let User::Banned(reason) = types::user_state(4) {
+        println!("{}", reason);
+    }
+    println!("{:?}", types::user_state(4));
 }
 
 
