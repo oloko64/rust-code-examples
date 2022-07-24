@@ -6,6 +6,7 @@ mod conversions;
 mod concurrency;
 mod hashmaps;
 mod types;
+mod lifehooks;
 
 struct Car {
     name: String,
