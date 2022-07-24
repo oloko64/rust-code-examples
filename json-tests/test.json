@@ -1,0 +1,19 @@
+{
+  "products": [
+    {
+      "name": "Hammer",
+      "price": "100",
+      "description": "A hammer"
+    },
+    {
+      "name": "Nail",
+      "price": "10",
+      "description": "A nail"
+    },
+    {
+      "name": "Screwdriver",
+      "price": "50",
+      "description": "A screwdriver"
+    }
+  ]
+}
