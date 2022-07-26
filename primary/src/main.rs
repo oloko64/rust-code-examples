@@ -46,6 +46,8 @@ fn main () {
         println!("{}", reason);
     }
     println!("{:?}", types::user_state(4));
+    prt(33);
+    prt("sdfgs");
 }
 
 
@@ -58,4 +60,8 @@ fn iterate_strings() {
     for c2 in "abcdefgã".graphemes(true) {
         println!("{}", c2);
     }
+}
+
+fn prt<T: std::fmt::Debug>(value: T) {
+    println!("{:?}", value);
 }
