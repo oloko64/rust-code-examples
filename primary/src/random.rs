@@ -72,3 +72,27 @@ pub fn borrow() {
 
     println!("{:?}", iter);
 }
+
+fn official_sort(mut arr: Vec<i32>) -> Vec<i32> {
+    arr.sort();
+    arr
+}
+
+fn my_sort(mut arr: Vec<i32>) -> Vec<i32> {
+    let arr_len = arr.len();
+    let mut swapped = false;
+
+    for i in 0..arr_len - 1 {
+        for j in 0..arr_len - i - 1 {
+            if arr[j] > arr[j + 1] {
+                swapped = true;
+                (arr[j], arr[j + 1]) = (arr[j + 1], arr[j]);
+                // arr.swap(j, j + 1);
+            }
+        }
+        if !swapped {
+            break;
+        }
+    }
+    arr
+}
