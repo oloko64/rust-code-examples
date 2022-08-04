@@ -29,6 +29,17 @@ impl Car {
 }
 
 fn main () {
+    'a:loop {
+        loop {
+            loop {
+                break 'a;
+            }
+        }
+    }
+    // let cl = () => {}
+    let cl = |x: i32| {x + 3};
+    cl(3);
+
     // random::random();
     // conversions::to_json();
     random::borrow();
@@ -48,6 +59,16 @@ fn main () {
     println!("{:?}", types::user_state(4));
     prt(33);
     prt("sdfgs");
+    // print_loops(); Vec<Vec<u8>>
+
+    let v = vec![1, 2, 3];
+    println!("{:?}", v);
+    test(v.clone());
+    println!("{v:?}");
+}
+
+fn test(mut vec: Vec<i32>) {
+    vec.push(3);
 }
 
 
@@ -64,4 +85,21 @@ fn iterate_strings() {
 
 fn prt<T: std::fmt::Debug>(value: T) {
     println!("{:?}", value);
+}
+
+fn print_loops() {
+    for i in 0..=100 {
+        let mut out = String::new();
+
+        if i % 3 == 0 && i % 5 == 0 {
+            out.push_str("FizzBuzz");
+        } else if i % 3 == 0 {
+            out.push_str("Fizz");
+        } else if i % 5 == 0 {
+            out.push_str("Buzz");
+        } else {
+            out.push_str(&i.to_string());
+        }
+        println!("{}", out);
+    }
 }
