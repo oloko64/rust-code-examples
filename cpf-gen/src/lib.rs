@@ -1,15 +1,12 @@
 use rand::Rng;
-use wasm_bindgen::prelude::*;
 
-#[wasm_bindgen]
 #[derive(Debug)]
 pub struct Cpf {
     pub cpf: String,
     pub cpf_formatted: String,
-    pub cpf_state: Box<Vec<String>>,
+    pub cpf_state: Vec<String>,
 }
 
-#[wasm_bindgen]
 pub fn generate_cpf(state_code: Option<u8>) -> Cpf {
     let cpf_seed = match state_code {
         Some(state_code) => {
