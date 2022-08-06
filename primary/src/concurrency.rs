@@ -1,4 +1,4 @@
-use std::thread;
+use std::{thread, sync::{Mutex, Arc}};
 
 pub fn threads() {
     // Thread example
@@ -28,4 +28,20 @@ pub fn threads() {
     let closure = || println!("captured {data:?} by value");
     closure();
     println!("captured {:?} by reference", data);
+}
+
+fn arcs_mutex() {
+    let v = Arc::new(Mutex::new(0));
+    let mut handles = Vec::new();
+    for _ in 0..10 {
+        let v = v.clone();
+        let handle = thread::spawn(move || {
+            let mut data = v.lock().unwrap();
+            *data += 1;
+        });
+        handles.push(handle);
+    }
+    for handle in handles {
+        handle.join().unwrap();
+    }
 }
