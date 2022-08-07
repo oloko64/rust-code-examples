@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
 
@@ -61,14 +63,28 @@ fn main () {
     prt("sdfgs");
     // print_loops(); Vec<Vec<u8>>
 
-    let v = vec![1, 2, 3];
+    let mut v = vec!["1", "2", "3"];
     println!("{:?}", v);
-    test(v.clone());
-    println!("{v:?}");
+    test(&mut v, "4");
+    println!("{:?}", v);
+
+    question("banana");
 }
 
-fn test(mut vec: Vec<i32>) {
-    vec.push(3);
+fn test<'a>(vec: &mut Vec<&'a str>, x: &'a str) {
+    vec.push(x);
+}
+
+fn question(st: &str) {
+    let mut set: HashSet<&str> = HashSet::new();
+    for i in 0..st.len() {
+        for j in i..st.len() {
+            set.insert(&st[i..j+1]);
+        }
+    }
+    let mut vec = set.into_iter().collect::<Vec<_>>();
+    vec.sort();
+    println!("{:?}", vec.last().unwrap());
 }
 
 
