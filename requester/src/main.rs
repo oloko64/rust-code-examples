@@ -29,11 +29,11 @@ async fn send_requests(args: Args) {
     for index in 0..pool_blocks.len() {
         let mut tasks = Vec::new();
         for req in 0..pool_blocks[index] {
-            let cloned_args = Arc::clone(&arc_args);
+            let cloned_arc_args = Arc::clone(&arc_args);
             let task = tokio::spawn(async move {
-                let res = match cloned_args.type_request.as_str() {
-                    "GET" => make_get_request(&cloned_args.url).await,
-                    "POST" => make_post_request(&cloned_args.url, &cloned_args.body).await,
+                let res = match cloned_arc_args.type_request.as_str() {
+                    "GET" => make_get_request(&cloned_arc_args.url).await,
+                    "POST" => make_post_request(&cloned_arc_args.url, &cloned_arc_args.body).await,
                     _ => panic!("Invalid request type. Must be GET or POST."),
                 };
                 match res {
