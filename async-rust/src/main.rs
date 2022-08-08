@@ -1,58 +1,65 @@
+mod arg_parser;
 
-// use std::thread;
-
+use arg_parser::Args;
+use clap::Parser;
 use reqwest::Response;
 
-// fn main() {
-//     let url = "https://fastcruddev.simbioseventures.com/";
-//     let num_of_requests = 10000;
-//     let mut tasks = Vec::new();
-
-//     println!("Starting {} requests to {}...", num_of_requests, url);
-
-//     for _ in 0..num_of_requests {
-//         tasks.push(thread::spawn(move || {
-//             make_request(&url);
-//         }));
-//     }
-
-//     for task in tasks {
-//         task.join().unwrap();
-//     }
-//     println!("\nMade {} requests", num_of_requests);
-// }
-
-// #[tokio::main]
-// async fn make_request(url: &str) {
-//     let res = reqwest::get(url).await;
-//     match res {
-//         Ok(_) => print!("."),
-//         Err(err) => println!("{}", err)
-//     }
-// }
+fn main() {
+    let args_parsed = Args::parse();
+    send_requests(args_parsed);
+}
 
 #[tokio::main]
-async fn main() {
-    let url = "https://fastcruddev.simbioseventures.com/";
-    let num_of_requests = 10000;
-    let mut tasks = Vec::new();
+async fn send_requests(args: Args) {
+    let pool_blocks = calc_req_blocks(args.request_number, args.pool_size);
 
-    println!("Starting {} requests to {}...", num_of_requests, url);
+    println!(
+        "Starting {} requests to {}...",
+        args.request_number, &args.url
+    );
+    println!(
+        "{} requests will be made in {:?} pool blocks, starting now...\n",
+        args.request_number, &pool_blocks
+    );
 
-    for i in 0..num_of_requests {
-        let task = tokio::spawn(async move {
-            let res = make_request(url).await;
-            match res {
-                Ok(_) => print!("."),
-                Err(err) => println!("{} - {}", i, err)
-            }
-        });
-        tasks.push(task);
+    for index in 0..pool_blocks.len() {
+        let mut tasks = Vec::new();
+        for req in 0..pool_blocks[index] {
+            let url = args.url.clone();
+            let task = tokio::spawn(async move {
+                let res = make_request(&url).await;
+                match res {
+                    Ok(_) => (),
+                    Err(err) => println!("Request n.: {} - {}.", req, err),
+                }
+            });
+            tasks.push(task);
+        }
+        for task in tasks {
+            task.await.unwrap();
+        }
+        println!(
+            "Pool n.: {} of {} - Done | {} requests were sent.",
+            index + 1,
+            pool_blocks.len(),
+            pool_blocks[index]
+        );
     }
-    for task in tasks {
-        task.await.unwrap();
+    println!("\nSent {} requests.", args.request_number);
+}
+
+fn calc_req_blocks(number: u32, pool_size: u32) -> Vec<u32> {
+    let mut pool_blocks = Vec::new();
+    let division = number / pool_size;
+    let remainder = number % pool_size;
+
+    for _ in 0..division {
+        pool_blocks.push(pool_size);
     }
-    println!("\nMade {} requests", num_of_requests);
+    if remainder > 0 {
+        pool_blocks.push(remainder);
+    }
+    pool_blocks
 }
 
 async fn make_request(url: &str) -> Result<Response, reqwest::Error> {
