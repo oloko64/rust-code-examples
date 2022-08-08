@@ -1,4 +1,5 @@
 mod arg_parser;
+mod utils;
 
 use arg_parser::Args;
 use clap::Parser;
@@ -27,7 +28,7 @@ async fn send_requests(args: Args) {
         for req in 0..pool_blocks[index] {
             let url = args.url.clone();
             let type_request = args.type_request.clone();
-            let body = args.body.clone().unwrap_or("".to_string());
+            let body = args.body.clone().unwrap_or_else(|| "".to_string());
             let task = tokio::spawn(async move {
                 let res = match type_request.as_str() {
                     "GET" => make_get_request(&url).await,
@@ -74,5 +75,6 @@ async fn make_get_request(url: &str) -> Result<Response, reqwest::Error> {
 
 async fn make_post_request(url: &str, body: String) -> Result<Response, reqwest::Error> {
     let client = reqwest::Client::new();
-    client.post(url).body(body).send().await
+    let json = utils::parse_to_json(&body).expect("Invalid JSON.");
+    client.post(url).json(&json).body(body).send().await
 }

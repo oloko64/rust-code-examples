@@ -22,7 +22,7 @@ pub struct Args {
     #[clap(short, long, value_parser, default_value = "GET")]
     pub type_request: String,
 
-    /// Request body.
+    /// Request body. JSON only.
     #[clap(short, long, value_parser)]
     pub body: Option<String>,
 }
