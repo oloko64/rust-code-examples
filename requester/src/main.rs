@@ -32,7 +32,7 @@ async fn send_requests(args: Args) {
                 let res = match type_request.as_str() {
                     "GET" => make_get_request(&url).await,
                     "POST" => make_post_request(&url, body).await,
-                    _ => panic!("Invalid request type."),
+                    _ => panic!("Invalid request type. Must be GET or POST."),
                 };
                 match res {
                     Ok(_) => (),
