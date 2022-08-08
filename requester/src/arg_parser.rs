@@ -17,4 +17,12 @@ pub struct Args {
     /// Example: https://www.example.com
     #[clap(short, long, value_parser)]
     pub url: String,
+
+    /// Request type - [GET, POST].
+    #[clap(short, long, value_parser, default_value = "GET")]
+    pub type_request: String,
+
+    /// Request body.
+    #[clap(short, long, value_parser)]
+    pub body: Option<String>,
 }

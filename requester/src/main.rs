@@ -18,16 +18,22 @@ async fn send_requests(args: Args) {
         args.request_number, &args.url
     );
     println!(
-        "{} requests will be made in {:?} pool blocks, starting now...\n",
-        args.request_number, &pool_blocks
+        "{} {} requests will be made in {:?} pool blocks, starting now...\n",
+        args.request_number, &args.type_request, &pool_blocks
     );
 
     for index in 0..pool_blocks.len() {
         let mut tasks = Vec::new();
         for req in 0..pool_blocks[index] {
             let url = args.url.clone();
+            let type_request = args.type_request.clone();
+            let body = args.body.clone().unwrap_or("".to_string());
             let task = tokio::spawn(async move {
-                let res = make_request(&url).await;
+                let res = match type_request.as_str() {
+                    "GET" => make_get_request(&url).await,
+                    "POST" => make_post_request(&url, body).await,
+                    _ => panic!("Invalid request type."),
+                };
                 match res {
                     Ok(_) => (),
                     Err(err) => println!("Request n.: {} - {}.", req, err),
@@ -62,6 +68,11 @@ fn calc_req_blocks(number: u32, pool_size: u32) -> Vec<u32> {
     pool_blocks
 }
 
-async fn make_request(url: &str) -> Result<Response, reqwest::Error> {
+async fn make_get_request(url: &str) -> Result<Response, reqwest::Error> {
     reqwest::get(url).await
+}
+
+async fn make_post_request(url: &str, body: String) -> Result<Response, reqwest::Error> {
+    let client = reqwest::Client::new();
+    client.post(url).body(body).send().await
 }
