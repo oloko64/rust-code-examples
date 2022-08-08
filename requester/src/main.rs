@@ -1,6 +1,8 @@
 mod arg_parser;
 mod utils;
 
+use std::sync::Arc;
+
 use arg_parser::Args;
 use clap::Parser;
 use reqwest::Response;
@@ -12,27 +14,26 @@ fn main() {
 
 #[tokio::main]
 async fn send_requests(args: Args) {
-    let pool_blocks = calc_req_blocks(args.request_number, args.pool_size);
+    let arc_args = Arc::new(args);
+    let pool_blocks = calc_req_blocks(arc_args.request_number, arc_args.pool_size);
 
     println!(
         "Starting {} requests to {}...",
-        args.request_number, &args.url
+        arc_args.request_number, &arc_args.url
     );
     println!(
         "{} {} requests will be made in {:?} pool blocks, starting now...\n",
-        args.request_number, &args.type_request, &pool_blocks
+        arc_args.request_number, &arc_args.type_request, &pool_blocks
     );
 
     for index in 0..pool_blocks.len() {
         let mut tasks = Vec::new();
         for req in 0..pool_blocks[index] {
-            let url = args.url.clone();
-            let type_request = args.type_request.clone();
-            let body = args.body.clone().unwrap_or_else(|| "".to_string());
+            let cloned_args = Arc::clone(&arc_args);
             let task = tokio::spawn(async move {
-                let res = match type_request.as_str() {
-                    "GET" => make_get_request(&url).await,
-                    "POST" => make_post_request(&url, body).await,
+                let res = match cloned_args.type_request.as_str() {
+                    "GET" => make_get_request(&cloned_args.url).await,
+                    "POST" => make_post_request(&cloned_args.url, &cloned_args.body).await,
                     _ => panic!("Invalid request type. Must be GET or POST."),
                 };
                 match res {
@@ -52,7 +53,7 @@ async fn send_requests(args: Args) {
             pool_blocks[index]
         );
     }
-    println!("\nSent {} requests.", args.request_number);
+    println!("\nSent {} requests.", arc_args.request_number);
 }
 
 fn calc_req_blocks(number: u32, pool_size: u32) -> Vec<u32> {
@@ -73,7 +74,14 @@ async fn make_get_request(url: &str) -> Result<Response, reqwest::Error> {
     reqwest::get(url).await
 }
 
-async fn make_post_request(url: &str, body: String) -> Result<Response, reqwest::Error> {
+async fn make_post_request(
+    url: &str,
+    body_req: &Option<String>,
+) -> Result<Response, reqwest::Error> {
+    let body = match body_req {
+        Some(body) => body.to_string(),
+        None => "".to_string(),
+    };
     let client = reqwest::Client::new();
     let json = utils::parse_to_json(&body).expect("Invalid JSON.");
     client.post(url).json(&json).body(body).send().await
