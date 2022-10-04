@@ -33,7 +33,7 @@ pub fn generate_cpf(state_code: Option<u8>) -> Cpf {
 
 fn verifier_num(n1: u32) -> u8 {
     let n2 = n1 % 11;
-    if n2 < 2 {  0 } else { (11 - n2).try_into().unwrap() }
+    if n2 < 2 { 0 } else { (11 - n2).try_into().unwrap() }
 }
 
 fn random_seed() -> [u8; 9] {

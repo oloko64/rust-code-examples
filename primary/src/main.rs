@@ -1,5 +1,5 @@
 use std::collections::HashSet;
-
+mod teste;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
 
@@ -31,6 +31,9 @@ impl Car {
 }
 
 fn main () {
+    teste::teste::teste();
+    println!("{}", teste::secondfile::secondNumber(3));
+
     'a:loop {
         loop {
             loop {
