@@ -34,7 +34,7 @@ fn arcs_mutex() {
     let v = Arc::new(Mutex::new(0));
     let mut handles = Vec::new();
     for _ in 0..10 {
-        let v = v.clone();
+        let v = Arc::clone(&v);
         let handle = thread::spawn(move || {
             let mut data = v.lock().unwrap();
             *data += 1;
