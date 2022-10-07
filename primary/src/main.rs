@@ -28,7 +28,12 @@ impl Car {
             year,
         }
     }
+
+    fn drive(&self) {
+        println!("{} is driving", self.name);
+    }
 }
+
 
 fn main () {
     let pointer_to_number = 0;
@@ -56,6 +61,7 @@ fn main () {
     let _test = Box::from(3);
 
     let car = Car::new("Ferrari".to_string(), 2019);
+    car.drive();
 
     println!("{:#?}", car.name);
 
