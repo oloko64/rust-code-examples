@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::{collections::HashSet, ptr};
 mod teste;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
@@ -31,8 +31,12 @@ impl Car {
 }
 
 fn main () {
+    let pointer_to_number = 0;
+
+    println!("{:?}", ptr::addr_of!(pointer_to_number));
+
     teste::teste::teste();
-    println!("{}", teste::secondfile::secondNumber(3));
+    println!("{}", teste::secondfile::second_number(3));
 
     'a:loop {
         loop {
