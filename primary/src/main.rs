@@ -1,8 +1,8 @@
-use std::{collections::HashSet, ptr};
+use std::{collections::HashSet, ptr, time::Duration, thread};
 mod teste;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
-
+use rayon::prelude::*;
 mod random;
 mod conversions;
 mod concurrency;
@@ -34,11 +34,26 @@ impl Car {
     }
 }
 
+fn parallel_test() {
+    ["muriloo", "reinaldo"].into_iter().for_each(|i| {
+        println!("{} is driving", i);
+        thread::sleep(Duration::from_secs(2));
+    });
+}
+
 
 fn main () {
     let pointer_to_number = 0;
 
+    parallel_test();
+
     println!("{:?}", ptr::addr_of!(pointer_to_number));
+
+    let a = Box::new(1);
+
+    let b = &a;
+
+    println!("{}", a);
 
     teste::teste::teste();
     println!("{}", teste::secondfile::second_number(3));
