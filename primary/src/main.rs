@@ -21,6 +21,12 @@ enum Mode<T, U> {
     Stop(T),
 }
 
+enum Event {
+    Click { x: i64, y: i64 },
+    KeyPress(char),
+    KeyRelease(char),
+}
+
 impl Car {
     fn new(name: String, year: i32) -> Car {
         Car {
@@ -32,6 +38,10 @@ impl Car {
     fn drive(&self) {
         println!("{} is driving", self.name);
     }
+}
+
+fn press_key(key: char) -> Event {
+    Event::KeyPress(key)
 }
 
 fn parallel_test() {
@@ -145,5 +155,20 @@ fn print_loops() {
             out.push_str(&i.to_string());
         }
         println!("{}", out);
+    }
+}
+
+#[cfg(test)]
+
+mod tests {
+    use super::*;
+
+    #[test]
+    fn press_key_test() {
+        let event = press_key('a');
+        match event {
+            Event::KeyPress(c) => assert_eq!(c, 'a'),
+            _ => panic!("Expected a key press event"),
+        }
     }
 }
