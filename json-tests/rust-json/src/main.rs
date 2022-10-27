@@ -11,6 +11,8 @@ pub struct Teste {
     products: Vec<Product>,
 }
 
+// Adding those serde macros above avery variable inside a struct improve it's performance.
+// You can use the "Paste JSON as Code" extension to do this automatically.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Product {
     #[serde(rename = "name")]
@@ -23,6 +25,7 @@ pub struct Product {
     description: String,
 }
 
+// Test the serialization and deserialization using serde_json.
 fn main() {
     let file = read_to_string("../test.json").expect("Error reading file");
     let teste: Teste = serde_json::from_str(&file).expect("Error converting file");

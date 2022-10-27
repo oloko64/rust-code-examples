@@ -40,10 +40,12 @@ impl Car {
     }
 }
 
+// A example of Enum usage.
 fn press_key(key: char) -> Event {
     Event::KeyPress(key)
 }
 
+/// Using the Rayon library to make parallel computations.
 fn parallel_test() {
     ["muriloo", "reinaldo"].into_iter().for_each(|i| {
         println!("{} is driving", i);
@@ -51,7 +53,7 @@ fn parallel_test() {
     });
 }
 
-
+// This is a mix of various tests that I've done to learn Rust.
 fn main () {
     let pointer_to_number = 0;
 
@@ -109,10 +111,13 @@ fn main () {
     question("banana");
 }
 
+// This makes sure that the referenced array and the referenced string are not dropped.
+// Reference: https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html?highlight=lifetime#lifetime-elision
 fn test<'a>(vec: &mut Vec<&'a str>, x: &'a str) {
     vec.push(x);
 }
 
+// Using HashSet to remove duplicates from a vector.
 fn question(st: &str) {
     let mut set: HashSet<&str> = HashSet::new();
     for i in 0..st.len() {
@@ -120,6 +125,7 @@ fn question(st: &str) {
             set.insert(&st[i..j+1]);
         }
     }
+    // Convert the HashSet into a vector as HashSet does not implement the sort method.
     let mut vec = set.into_iter().collect::<Vec<_>>();
     vec.sort();
     println!("{:?}", vec.last().unwrap());
@@ -127,20 +133,23 @@ fn question(st: &str) {
 
 
 fn iterate_strings() {
-    // Not the correct way as may be errors depending on the char
+    // Not the correct way as may be errors depending on the char, as UTF-8 is not a fixed size of one byte.
     for c in "abcdefgã".chars() {
         println!("{}", c);
     }
 
+    // The correct way to iterate over a string chars, using the unicode_segmentation crate.
     for c2 in "abcdefgã".graphemes(true) {
         println!("{}", c2);
     }
 }
 
+// A example of a function where the first argument receives the Debug Trait.
 fn prt<T: std::fmt::Debug>(value: T) {
     println!("{:?}", value);
 }
 
+// Iteration examples.
 fn print_loops() {
     for i in 0..=100 {
         let mut out = String::new();
@@ -158,9 +167,11 @@ fn print_loops() {
     }
 }
 
+// How to test a function even if they are private.
 #[cfg(test)]
 
 mod tests {
+    // This allow us to use the private functions of this module.
     use super::*;
 
     #[test]

@@ -6,6 +6,10 @@ use std::fs::read_to_string;
 use std::io::Read;
 use std::process;
 
+
+// Reference: https://doc.rust-lang.org/std/collections/struct.HashMap.html
+// Reference: https://doc.rust-lang.org/std/collections/struct.HashSet.html
+/// Using HashMap and HashSet collections.
 pub fn hashmaps() {
     // Type inference lets us omit an explicit type signature (which
     // would be `HashMap<String, String>` in this example).
@@ -21,6 +25,7 @@ pub fn hashmaps() {
     println!("{:?}", hashset);
 
     // Review some books.
+    // If you repeat a book key, the first review will be overwritten.
     book_reviews.insert(
         "Adventures of Huckleberry Finn".to_string(),
         "My favorite book.".to_string(),
@@ -47,6 +52,7 @@ pub fn hashmaps() {
         })
     };
     println!("{}", teste());
+    // Prints the review or print that nothing was found for that key.
     println!("{}", book_reviews.get("Adventures of Huckleberry Finns").unwrap_or(&"Nothing found".to_string()));
 
     if let Err(e) = run("src/main.rs".to_string()) {
@@ -56,6 +62,7 @@ pub fn hashmaps() {
     }
 }
 
+/// A simple file reader example that returns a Result.
 pub fn run(filename: String) -> Result<(), Box<dyn Error>>{
     let mut f = File::open(filename)?;
 

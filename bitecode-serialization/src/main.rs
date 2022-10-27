@@ -13,7 +13,7 @@ fn main() {
     using_bincode_to_file().unwrap();
 }
 
-// Manually opening the file and deserializing it
+/// Manually opening the file and deserializing it without using the bincode functions.
 fn using_bincode_manual_to_file() -> Result<(), Box<dyn Error>> {
     let world = World { name: "manual".to_string(), age: 29 };
 
@@ -29,7 +29,7 @@ fn using_bincode_manual_to_file() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-// Using the functions from bincode to serialize and deserialize
+/// Using the functions from bincode to serialize and deserialize.
 fn using_bincode_to_file() -> Result<(), Box< dyn Error>>{
     let world = World { name: "bincode".to_string(), age: 23 };
 

@@ -7,6 +7,7 @@ pub struct Cpf {
     pub cpf_state: Vec<String>,
 }
 
+/// Generate a random CPF from a optional state code and return it as a Cpf struct.
 pub fn generate_cpf(state_code: Option<u8>) -> Cpf {
     let cpf_seed = match state_code {
         Some(state_code) => {
@@ -31,11 +32,13 @@ pub fn generate_cpf(state_code: Option<u8>) -> Cpf {
     }
 }
 
+/// Generates the verifier code for a CPF, the 2 last ones.
 fn verifier_num(n1: u32) -> u8 {
     let n2 = n1 % 11;
     if n2 < 2 { 0 } else { (11 - n2).try_into().unwrap() }
 }
 
+/// Generates a random CPF seed, the first 9 numbers.
 fn random_seed() -> [u8; 9] {
     let mut seed = [0; 9];
     for i in 0..9 {
@@ -44,6 +47,7 @@ fn random_seed() -> [u8; 9] {
     seed
 }
 
+/// Based of the given CPF gets it's state code.
 fn cpf_state(cpf: &str) -> Vec<&str> {
     let state_code: char = cpf.chars().nth(8).unwrap();
     match state_code {

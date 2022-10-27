@@ -1,5 +1,6 @@
 struct Solution {}
 
+// Using impl to define a method on a struct.
 impl Solution {
     pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
         for (i_index, i_num) in nums.iter().enumerate() {

@@ -9,3 +9,5 @@ edition = "2021"
 eframe = "0.19.0"
 egui = "0.19.0"
 rayon = "1.5.3"
+reqwest = { version = "0.11.12", features = ["json", "blocking"] }
+tokio = { version = "1.21.2", features = ["full"] }

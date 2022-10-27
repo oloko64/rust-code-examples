@@ -1,11 +1,13 @@
 use std::env;
 use std::fs;
 
+/// Open a file for reading and return its contents as a string.
 fn read_file(path: &str) -> String {
     let file = fs::read_to_string(path).expect("Unable to read input file");
     file
 }
 
+/// Convert a string of bytes to a string of binary.
 fn convert_string_to_binary(text: String) -> String {
     let mut binary = String::new();
     for character in text.clone().into_bytes() {
@@ -14,6 +16,7 @@ fn convert_string_to_binary(text: String) -> String {
     binary.trim().to_string()
 }
 
+/// Write the contents of a string to a file.
 fn write_file(path: &str, text: String) {
     fs::write(path, text).expect("Unable to write output file");
 }

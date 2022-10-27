@@ -6,6 +6,7 @@ pub enum User<T> {
     Banned(T)
 }
 
+// How to match between Enums.
 pub fn user_state(code: u8) -> User<String> {
     match code {
         0 => User::Active,

@@ -12,6 +12,8 @@ fn main() {
     send_requests(args_parsed);
 }
 
+// Uses the tokio crate to send the requests asynchronously.
+/// Send the requests asynchronously using the tokio crate.
 #[tokio::main]
 async fn send_requests(args: Args) {
     let arc_args = Arc::new(args);
@@ -28,7 +30,9 @@ async fn send_requests(args: Args) {
 
     for index in 0..pool_blocks.len() {
         let mut tasks = Vec::new();
+        // Create a vector of tasks to be executed in parallel.
         for req in 0..pool_blocks[index] {
+            // Clone the Arc to avoid borrowing issues.
             let cloned_arc_args = Arc::clone(&arc_args);
             let task = tokio::spawn(async move {
                 let res = match cloned_arc_args.type_request.as_str() {
@@ -43,6 +47,7 @@ async fn send_requests(args: Args) {
             });
             tasks.push(task);
         }
+        // Wait for all tasks to finish.
         for task in tasks {
             task.await.unwrap();
         }
@@ -56,6 +61,7 @@ async fn send_requests(args: Args) {
     println!("\nSent {} requests.", arc_args.request_number);
 }
 
+// Calculates the number of requests to be sent in each pool block.
 fn calc_req_blocks(number: u32, pool_size: u32) -> Vec<u32> {
     let mut pool_blocks = Vec::new();
     let division = number / pool_size;
@@ -70,10 +76,12 @@ fn calc_req_blocks(number: u32, pool_size: u32) -> Vec<u32> {
     pool_blocks
 }
 
+/// Makes a GET request to the specified URL.
 async fn make_get_request(url: &str) -> Result<Response, reqwest::Error> {
     reqwest::get(url).await
 }
 
+/// Makes a POST request to the specified URL with the specified body.
 async fn make_post_request(
     url: &str,
     body_req: &Option<String>,

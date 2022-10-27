@@ -10,7 +10,7 @@ pub enum Teste {
 pub struct Teste2 {
     pub a: Teste,
 }
-
+// Random tests that are small enough to be put in the main function.
 pub fn random () {
     let mut count = 0;
     let vec = vec![1, 2, 3, 5, 6, 7, 8, 9, 10];
@@ -32,9 +32,12 @@ pub fn random () {
     println!("{:?}", b);
     println!("{:?}", c.a);
 
+    // A example of a closure.
     let add = |x: i32, y: i32| x + y;
 
     println!("{}", add(1, 2));
+
+    // How to use the loop keyword.
     loop {
         println!("Before -> {}", count);
         count += 1;
@@ -51,10 +54,12 @@ pub fn random () {
     }
 }
 
+// A simple return statement.
 pub fn ten_times(value: i32) -> i32 {
     value * 10
 }
 
+// A simple function that returns an Option.
 pub fn optional() -> Option<String> {
     let value = 10; 
     if value == 102 {
@@ -64,6 +69,7 @@ pub fn optional() -> Option<String> {
     }
 }
 
+// Testing the borrow checker and its rules.
 pub fn borrow() {
     let s = vec![1, 2, 3, 4];
     let _f = String::from("teste");
@@ -73,11 +79,13 @@ pub fn borrow() {
     println!("{:?}", iter);
 }
 
+// Return a cloned vector.
 fn official_sort(mut arr: Vec<i32>) -> Vec<i32> {
     arr.sort();
     arr
 }
 
+// A manual implementation of a sort algorithm, using the bubble sort algorithm and no extern crates.
 fn my_sort(mut arr: Vec<i32>) -> Vec<i32> {
     let arr_len = arr.len();
     let mut swapped = false;

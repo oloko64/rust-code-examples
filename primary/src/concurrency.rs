@@ -1,5 +1,6 @@
 use std::{thread, sync::{Mutex, Arc}};
 
+/// A example of various thread implementations.
 pub fn threads() {
     // Thread example
     let thread_value = 3;
@@ -30,6 +31,7 @@ pub fn threads() {
     println!("captured {:?} by reference", data);
 }
 
+/// Example of a thread that makes use of a mutex to prevent concurrent access to a resource.
 fn arcs_mutex() {
     let v = Arc::new(Mutex::new(0));
     let mut handles = Vec::new();

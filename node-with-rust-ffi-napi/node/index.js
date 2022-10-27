@@ -1,9 +1,13 @@
 const ffi = require('ffi-napi');
 
+// A example of a function uses the Rust FFI.
 const lib = ffi.Library('../rust/target/release/librust_math', {
     'add_numbers': ['int', ['int', 'int']],
     'calc_fibonacci': ['int', ['int']],
 })
+
+// Compare the performance between the FFI library and the pure JavaScript implementation.
+// For this you need to build the FFI library first.
 
 function calculateFibonacci(n) {
     if (n < 2) {

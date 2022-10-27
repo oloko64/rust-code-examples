@@ -19,6 +19,7 @@ const myTestSchema = z.object({
     }))
 });
 
+// Using the zod library to validate the json.
 try {
   const data = fs.readFileSync('../test.json', 'utf8');
 //   console.log(data);
