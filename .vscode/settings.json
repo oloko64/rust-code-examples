@@ -3,10 +3,13 @@
         "bincode",
         "bindgen",
         "Bytecode",
+        "egui",
         "lifehooks",
         "muriloo",
         "sdfgs",
         "secondfile",
+        "serde",
+        "Tauri",
         "teste"
     ]
 }
