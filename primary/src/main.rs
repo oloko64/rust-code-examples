@@ -1,5 +1,5 @@
 use std::{collections::HashSet, ptr, time::Duration, thread};
-mod teste;
+mod utils;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
 use rayon::prelude::*;
@@ -47,7 +47,7 @@ fn press_key(key: char) -> Event {
 
 /// Using the Rayon library to make parallel computations.
 fn parallel_test() {
-    ["muriloo", "reinaldo"].into_iter().for_each(|i| {
+    ["oloko", "reinaldo"].into_par_iter().for_each(|i| {
         println!("{} is driving", i);
         thread::sleep(Duration::from_secs(2));
     });
@@ -67,8 +67,8 @@ fn main () {
 
     println!("{}", a);
 
-    teste::teste::teste();
-    println!("{}", teste::secondfile::second_number(3));
+    utils::testing::teste();
+    println!("{}", utils::secondfile::second_number(3));
 
     'a:loop {
         loop {
@@ -109,6 +109,9 @@ fn main () {
     println!("{:?}", v);
 
     question("banana");
+
+    // A example of the Clone on Write (Cow).
+    utils::cloneonwrite::run_cow();
 }
 
 // This makes sure that the referenced array and the referenced string are not dropped.
