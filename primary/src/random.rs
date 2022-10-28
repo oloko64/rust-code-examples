@@ -1,3 +1,5 @@
+use std::num::ParseIntError;
+
 use rayon::prelude::*;
 
 #[derive(Debug)]
@@ -11,21 +13,23 @@ pub struct Teste2 {
     pub a: Teste,
 }
 // Random tests that are small enough to be put in the main function.
-pub fn random () {
+pub fn random() {
     let mut count = 0;
     let vec = vec![1, 2, 3, 5, 6, 7, 8, 9, 10];
-    let teste: Vec<i32> = vec.par_iter().map(|&i| ten_times(i) ).collect();
+    let teste: Vec<i32> = vec.par_iter().map(|&i| ten_times(i)).collect();
 
     println!("{:?}", teste);
-    
+
     // Testing Enums and Enum Structs
     let a = Teste::B(1);
-    let b = Teste::C{x: 10, y:11};
-    let c = Teste2 { a: Teste::C{x: 10, y:11} };
+    let b = Teste::C { x: 10, y: 11 };
+    let c = Teste2 {
+        a: Teste::C { x: 10, y: 11 },
+    };
     if let Teste::B(x) = a {
         println!("{}", x);
     }
-    if let Teste::C{x, y} = b {
+    if let Teste::C { x, y } = b {
         println!("{}", x);
         println!("{}", y);
     }
@@ -61,7 +65,7 @@ pub fn ten_times(value: i32) -> i32 {
 
 // A simple function that returns an Option.
 pub fn optional() -> Option<String> {
-    let value = 10; 
+    let value = 10;
     if value == 102 {
         Some("10".to_string())
     } else {
@@ -103,4 +107,15 @@ fn my_sort(mut arr: Vec<i32>) -> Vec<i32> {
         }
     }
     arr
+}
+
+
+// Using try_for_each to iterate over a vector and return an error if the value is not a number.
+pub fn try_for_each_example(arr: Vec<&str>) -> Vec<i32> {
+    let mut vec = Vec::new();
+    arr.into_iter().try_for_each(|el| {
+        vec.push(el.parse::<i32>().ok()?);
+        Some(())
+    });
+    vec
 }

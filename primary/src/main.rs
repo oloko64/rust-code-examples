@@ -112,6 +112,8 @@ fn main () {
 
     // A example of the Clone on Write (Cow).
     utils::cloneonwrite::run_cow();
+
+    dbg!(random::try_for_each_example(vec!["1", "2", "3", "as"]));
 }
 
 // This makes sure that the referenced array and the referenced string are not dropped.
