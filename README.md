@@ -4,8 +4,8 @@ I use this repository to try things out and learn new things.
 
 ## All the tests in this repository
 
-- [Main Tests Folder](./primary/) -> Some code examples too small to have their own repository or folder.
-- [Bytecode Serialization](./bitecode-serialization/) -> Using bincode to serialize and deserialize bytecode.
+- [Main Tests Folder](./rust-code-examples/) -> Some code examples too small to have their own repository or folder.
+- [Bytecode Serialization](./bytecode-serialization/) -> Using bincode to serialize and deserialize bytecode.
 - [Byte Converter](./byte-converter/) -> A simple program to convert strings to binary.
 - [CPF Generator](./cpf-gen/) -> A app that generates CPFs.
 - [Simple GUI using egui](./egui-app/) -> Using egui to create simple GUIs.

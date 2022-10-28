@@ -8,6 +8,9 @@
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "zod": "^3.17.10"
+  },
   "devDependencies": {
     "@types/node": "^18.0.6"
   }
