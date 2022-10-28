@@ -1,4 +1,4 @@
-# Rust code tests
+# Rust code examples
 
 I use this repository to try things out and learn new things.
 
