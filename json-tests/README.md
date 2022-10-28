@@ -4,6 +4,8 @@
 
 Using Rust with `serde_json` to deserialize JSON and validate it in runtime, reading from a file.
 
+---
+
 ### How to run
 
 ```bash

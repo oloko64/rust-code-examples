@@ -4,6 +4,8 @@ Using the `bincode` crate to serialize and deserialize Rust structs to and from 
 
 It has a example of a struct that can be serialized and deserialized to a binary file.
 
+---
+
 ## How to run
 
 ```bash

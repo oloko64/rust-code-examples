@@ -32,6 +32,8 @@ OPTIONS:
             Print version information
 ```
 
+---
+
 ## How to build
 
 ```bash

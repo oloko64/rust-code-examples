@@ -8,7 +8,7 @@ mod conversions;
 mod concurrency;
 mod hashmaps;
 mod types;
-mod lifehooks;
+mod lifetimes;
 
 struct Car {
     name: String,
@@ -67,8 +67,7 @@ fn main () {
 
     println!("{}", a);
 
-    utils::testing::teste();
-    println!("{}", utils::secondfile::second_number(3));
+    println!("{}", utils::testrust::second_number(3));
 
     'a:loop {
         loop {

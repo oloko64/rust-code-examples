@@ -2,6 +2,8 @@
 
 Using Rust code to create a `.so` shared library that can be used by Node.js.
 
+---
+
 ## Rust
 
 ### Compile the shared library
