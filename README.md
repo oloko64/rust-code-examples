@@ -2,9 +2,9 @@
 
 I use this repository to try things out and learn new things.
 
-## All the tests in this repository
+## All the code examples in this repository
 
-- [Main Tests Folder](./rust-code-examples/) -> Some code examples too small to have their own repository or folder.
+- [Main Examples Folder](./rust-code-examples/) -> Some code examples too small to have their own repository or folder.
 - [Bytecode Serialization](./bytecode-serialization/) -> Using bincode to serialize and deserialize bytecode.
 - [Byte Converter](./byte-converter/) -> A simple program to convert strings to binary.
 - [CPF Generator](./cpf-gen/) -> A app that generates CPFs.
