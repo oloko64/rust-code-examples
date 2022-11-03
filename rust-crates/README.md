@@ -15,6 +15,7 @@
 
 # System
 
+- [dotenv](https://crates.io/crates/dotenv) -> A `dotenv` implementation for Rust.
 - [time](https://crates.io/crates/time) -> Date and time library. Fully interoperable with the standard library. Mostly compatible with `#![no_std]`.
 - [chrono](https://crates.io/crates/chrono) -> It aims to be a feature-complete superset of the time library.
 - [dirs](https://crates.io/crates/dirs) -> A tiny low-level library that provides platform-specific standard locations of directories for config, cache and other data on Linux, Windows, macOS and Redox.
@@ -26,11 +27,13 @@
 
 # Databases
 
+- [sqlx](https://crates.io/crates/sqlx) -> The Rust SQL Toolkit. An async, pure Rust SQL crate featuring compile-time checked queries without a DSL. Supports PostgreSQL, MySQL, and SQLite.
 - [sqlite](https://crates.io/crates/sqlite) -> The package provides an interface to SQLite.
 - [diesel](https://crates.io/crates/diesel) -> A safe, extensible ORM and Query Builder for PostgreSQL, SQLite, and MySQL.
 
 # Web
 
+- [sentry](https://crates.io/crates/sentry) -> Sentry (getsentry.com) client for rust ;)
 - [axum](https://crates.io/crates/axum) -> Web framework that focuses on ergonomics and modularity.
 - [actix-web](https://crates.io/crates/actix-web) -> Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust.
 - [hyper](https://crates.io/crates/hyper) -> A fast and correct HTTP library.
