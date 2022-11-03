@@ -27,10 +27,15 @@
 # Databases
 
 - [sqlite](https://crates.io/crates/sqlite) -> The package provides an interface to SQLite.
+- [diesel](https://crates.io/crates/diesel) -> A safe, extensible ORM and Query Builder for PostgreSQL, SQLite, and MySQL.
 
 # Web
 
+- [axum](https://crates.io/crates/axum) -> Web framework that focuses on ergonomics and modularity.
 - [actix-web](https://crates.io/crates/actix-web) -> Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust.
+- [hyper](https://crates.io/crates/hyper) -> A fast and correct HTTP library.
+- [tower](https://crates.io/crates/tower) -> Tower is a library of modular and reusable components for building robust clients and servers.
+- [tower-http](https://crates.io/crates/tower-http) -> Tower middleware and utilities for HTTP clients and servers.
 - [reqwest](https://crates.io/crates/reqwest) -> higher level HTTP client library.
 - [wasm-bindgen](https://crates.io/crates/wasm-bindgen) -> Easy support for interacting between JS and Rust.
 
@@ -56,3 +61,16 @@
 
 - [clap](https://crates.io/crates/clap) -> A simple to use, efficient, and full-featured Command Line Argument Parser.
 - [dialoguer](https://crates.io/crates/dialoguer) -> A command line prompting library.
+
+# Log
+
+[A list of all recommended log tools](https://docs.rs/log/latest/log/)
+
+- [tracing](https://crates.io/crates/tracing) -> Application-level tracing for Rust, good for async implementations.
+- [tracing-subscriber](https://crates.io/crates/tracing-subscriber) -> Utilities for implementing and composing `tracing` subscribers.
+- [env_logger](https://crates.io/crates/env_logger) -> A logging implementation for `log` which is configured via an environment variable.
+- [simple_logger](https://crates.io/crates/simple_logger) -> A logger that prints all messages with a readable output format.
+- [simplelog](https://crates.io/crates/simplelog) -> A simple and easy-to-use logging facility for Rust's log crate.
+- [pretty_env_logger](https://crates.io/crates/pretty_env_logger) -> A visually pretty env_logger.
+- [stderrlog](https://crates.io/crates/stderrlog) -> Logger that logs to stderr based on verbosity specified.
+- [flexi_logger](https://crates.io/crates/flexi_logger) -> An easy-to-configure and flexible logger that writes logs to stderr or stdout and/or to files. It allows custom logline formats, and it allows changing the log specification at runtime. It also allows defining additional log streams, e.g. for alert or security messages.
