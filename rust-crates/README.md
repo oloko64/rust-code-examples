@@ -33,8 +33,10 @@
 
 # Web
 
+- [jsonwebtoken](https://crates.io/crates/jsonwebtoken) -> Create and decode JWTs in a strongly typed way.
 - [sentry](https://crates.io/crates/sentry) -> Sentry (getsentry.com) client for rust ;)
 - [axum](https://crates.io/crates/axum) -> Web framework that focuses on ergonomics and modularity.
+- [axum-auth](https://crates.io/crates/axum-auth) -> High-level http auth extractors for axum.
 - [actix-web](https://crates.io/crates/actix-web) -> Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust.
 - [hyper](https://crates.io/crates/hyper) -> A fast and correct HTTP library.
 - [tower](https://crates.io/crates/tower) -> Tower is a library of modular and reusable components for building robust clients and servers.
