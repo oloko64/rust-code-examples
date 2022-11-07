@@ -1,0 +1,2 @@
+maturin==0.13.7
+python-ffi @ file:///tmp/.tmpZ2xoTW/python_ffi-0.1.0-cp311-cp311-linux_x86_64.whl
