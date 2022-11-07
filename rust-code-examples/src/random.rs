@@ -18,6 +18,16 @@ pub fn random() {
     let vec = vec![1, 2, 3, 5, 6, 7, 8, 9, 10];
     let teste: Vec<i32> = vec.par_iter().map(|&i| ten_times(i)).collect();
 
+    let vec_str = vec!["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+    // FromIterator can really be unexpected coming from other languages where you don't expect to be able to use one method to produce options or results. I spent a long time mucking about with fold (reduce) to achieve similar results before this clicked.
+    //If you have a list of Result<T, E>s, you can use collect() to see if any of them failed:
+
+    // let results = [Ok(1), Err("nope"), Ok(3), Err("bad")];
+    // let result: Result<Vec<_>, &str> = results.iter().cloned().collect();
+    
+    // https://www.reddit.com/r/rust/comments/r6dpkz/using_result_inside_a_map_closure/
+    let vec_int = vec_str.into_iter().map(|i| i.parse::<i32>()).collect::<Result<Vec<_>, ParseIntError>>();
+
     println!("{:?}", teste);
 
     // Testing Enums and Enum Structs
