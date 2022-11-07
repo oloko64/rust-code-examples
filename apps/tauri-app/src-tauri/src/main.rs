@@ -7,7 +7,7 @@ use base64::decode;
 use std::{
     error::Error,
     fs::File,
-    io::{self, Write},
+    io::Write,
 };
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command

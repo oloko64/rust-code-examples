@@ -7,8 +7,8 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "tauri-app",
-    "version": "0.0.0"
+    "productName": "Tauri App Example",
+    "version": "0.0.1"
   },
   "tauri": {
     "allowlist": {
@@ -56,10 +56,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 800,
         "resizable": true,
         "title": "tauri-app",
-        "width": 800
+        "width": 1000
       }
     ]
   }
