@@ -24,11 +24,22 @@ interface FileData {
 }
 
 function openWindow() {
+  // https://tauri.app/v1/guides/features/multiwindow#create-a-window-in-javascript
   const webview = new WebviewWindow("Second-Window", {
     height: 800,
     width: 1000,
+    title: "Second Window",
     url: "/second-page",
   });
+
+  // since the webview window is created asynchronously,
+// Tauri emits the `tauri://created` and `tauri://error` to notify you of the creation response
+webview.once('tauri://created', function () {
+  // webview window successfully created
+})
+webview.once('tauri://error', function (e) {
+  // an error happened creating the webview window
+})
 }
 
 const greetMsg = ref("");
