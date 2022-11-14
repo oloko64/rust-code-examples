@@ -1,5 +1,10 @@
-# Concurrency
+# Links
 
+- [blessed.rs](https://blessed.rs/crates) -> An unofficial guide to the Rust ecosystem.
+
+# Concurrency/Futures
+
+- [futures-util](https://crates.io/crates/futures-util) -> Common utilities and extension traits for the futures-rs library.
 - [rayon](https://crates.io/crates/rayon) -> Simple work-stealing parallelism for Rust.
 - [tokio](https://crates.io/crates/tokio) -> An event-driven, non-blocking I/O platform for writing asynchronous I/O backed applications.
 - [crossbeam](https://crates.io/crates/crossbeam) -> This crate provides a set of tools for concurrent programming.
@@ -11,11 +16,32 @@
 
 # Rust Additions
 
+- [libc](https://crates.io/crates/libc) -> Raw FFI bindings to platform libraries like libc.
+- [memmap2](https://crates.io/crates/memmap2) -> Cross-platform Rust API for memory-mapped file IO.
+- [byteflags](https://crates.io/crates/bitflags) -> A macro to generate structures which behave like bitflags.
+- [bytemuck](https://crates.io/crates/bytemuck) -> A crate for mucking around with piles of bytes.
+- [byteorder](https://crates.io/crates/byteorder) -> Library for reading/writing numbers in big-endian and little-endian.
+- [num](https://crates.io/crates/num) -> A collection of numeric types and traits for Rust, including bigint, complex, rational, range iterators, generic integers, and more.
+- [itertools](https://crates.io/crates/itertools) -> Extra iterator adaptors, iterator methods, free functions, and macros.
+- [tinyvec](https://crates.io/crates/tinyvec) -> `tinyvec` provides 100% safe vec-like data structures.
+- [smallvec](https://crates.io/crates/smallvec) -> 'Small vector' optimization: store up to a small number of items on the stack.
+- [arrayvec](https://crates.io/crates/arrayvec) -> A vector with fixed capacity, backed by an array (it can be stored on the stack too). Implements fixed capacity ArrayVec and ArrayString.
+- [indexmap](https://crates.io/crates/indexmap) -> A hash table with consistent order and fast iteration.
+- [color-eyre](https://crates.io/crates/color-eyre) -> An error report handler for panics and eyre::Reports for colorful, consistent, and well formatted error reports for all kinds of errors.
+- [anyhow](https://crates.io/crates/anyhow) -> Flexible concrete Error type built on std::error::Error.
+- [thiserror](https://crates.io/crates/thiserror) -> This library provides a convenient derive macro for the standard library's `std::error::Error` trait.
 - [derive_more](https://crates.io/crates/derive_more) -> Adds #[derive(x)] macros for more traits.
 
 # System
 
-- [dotenv](https://crates.io/crates/dotenv) -> A `dotenv` implementation for Rust.
+- [tempfile](https://crates.io/crates/tempfile) -> A library for managing temporary files and directories.
+- [uuid](https://crates.io/crates/uuid) -> A library to generate and parse UUIDs.
+- [humantime](https://crates.io/crates/humantime) -> A parser and formatter for std::time::{Duration, Sys
+- temTime}.
+- [notify](https://crates.io/crates/notify) -> Cross-platform filesystem notification library.
+- [regex](https://crates.io/crates/regex) -> An implementation of regular expressions for Rust. This implementation uses finite automata and guarantees linear time matching on all inputs.
+- [dotenvy](https://crates.io/crates/dotenvy) -> A well-maintained fork of the dotenv crate.
+~~- [dotenv](https://crates.io/crates/dotenv) -> A `dotenv` implementation for Rust.~~
 - [time](https://crates.io/crates/time) -> Date and time library. Fully interoperable with the standard library. Mostly compatible with `#![no_std]`.
 - [chrono](https://crates.io/crates/chrono) -> It aims to be a feature-complete superset of the time library.
 - [dirs](https://crates.io/crates/dirs) -> A tiny low-level library that provides platform-specific standard locations of directories for config, cache and other data on Linux, Windows, macOS and Redox.
@@ -23,6 +49,7 @@
 - [enigo](https://crates.io/crates/enigo) -> Enigo lets you control your mouse and keyboard in an abstract way on different operating systems (currently only Linux, macOS, Win – Redox and *BSD planned).
 - [walkdir](https://crates.io/crates/walkdir) -> Recursively walk a directory.
 - [rand](https://crates.io/crates/rand) -> Random number generators and other randomness functionality.
+- [getrandom](https://crates.io/crates/getrandom) -> A small cross-platform library for retrieving random data from system source.
 - [unicode-segmentation](https://crates.io/crates/unicode-segmentation) -> This crate provides Grapheme Cluster, Word and Sentence boundaries according to Unicode Standard Annex #29 rules.
 
 # Databases
@@ -42,7 +69,9 @@
 - [tower](https://crates.io/crates/tower) -> Tower is a library of modular and reusable components for building robust clients and servers.
 - [tower-http](https://crates.io/crates/tower-http) -> Tower middleware and utilities for HTTP clients and servers.
 - [reqwest](https://crates.io/crates/reqwest) -> higher level HTTP client library.
+- [ureq](https://crates.io/crates/ureq) -> Simple, safe HTTP client.
 - [wasm-bindgen](https://crates.io/crates/wasm-bindgen) -> Easy support for interacting between JS and Rust.
+- [lettre](https://crates.io/crates/lettre) -> Email client.
 
 # GUI
 
@@ -51,8 +80,10 @@
 
 # Appearance
 
+- [owo-colors](https://crates.io/crates/owo-colors) -> Zero-allocation terminal colors that'll make people go owo.
 - [termcolor](https://crates.io/crates/termcolor) -> A simple cross platform library for writing colored text to a terminal.
 - [colorful](https://crates.io/crates/colorful) -> Make your terminal output colorful.
+- [comfy-table](https://crates.io/crates/comfy-table) -> An easy to use library for building beautiful tables with automatic content wrapping.
 - [prettytable-rs](https://crates.io/crates/prettytable-rs) -> A library for printing pretty formatted tables in terminal.
 - [termion](https://crates.io/crates/termion) -> A bindless library for manipulating terminals.
 
@@ -64,6 +95,10 @@
 
 # User interaction
 
+- [notify-rust](https://crates.io/crates/notify-rust) -> Show desktop notifications (linux, bsd, mac). Pure Rust dbus client and server.
+- [lexopt](https://crates.io/crates/lexopt) -> Minimalist pedantic command line parser.
+- [pico-args](https://crates.io/crates/pico-args) -> An ultra simple CLI arguments parser.
+- [argh](https://crates.io/crates/argh) -> Derive-based argument parser optimized for code size.
 - [clap](https://crates.io/crates/clap) -> A simple to use, efficient, and full-featured Command Line Argument Parser.
 - [dialoguer](https://crates.io/crates/dialoguer) -> A command line prompting library.
 
@@ -71,6 +106,7 @@
 
 [A list of all recommended log tools](https://docs.rs/log/latest/log/)
 
+- [log](https://crates.io/crates/log) -> A lightweight logging facade for Rust.
 - [tracing](https://crates.io/crates/tracing) -> Application-level tracing for Rust, good for async implementations.
 - [tracing-subscriber](https://crates.io/crates/tracing-subscriber) -> Utilities for implementing and composing `tracing` subscribers.
 - [env_logger](https://crates.io/crates/env_logger) -> A logging implementation for `log` which is configured via an environment variable.
