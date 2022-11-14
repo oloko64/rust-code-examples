@@ -1,5 +1,6 @@
 use std::{collections::HashSet, ptr, time::Duration, thread};
 mod utils;
+mod data_types;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
 use rayon::prelude::*;
@@ -55,6 +56,24 @@ fn parallel_test() {
 
 // This is a mix of various tests that I've done to learn Rust.
 fn main () {
+    // Linked List example
+    let mut list = data_types::linked_list_enum::LinkedList::new();
+    list.push_front(1);
+    list.push_front(2);
+    list.push_front(3);
+    list.push_back(4);
+
+    // list.push(3);
+    dbg!(list);
+
+    let mut linked_official = std::collections::LinkedList::new();
+    linked_official.push_front(1);
+    linked_official.push_front(2);
+    linked_official.push_front(3);
+    linked_official.push_back(4);
+
+    dbg!(linked_official);
+
     let pointer_to_number = 0;
 
     parallel_test();

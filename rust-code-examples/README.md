@@ -12,6 +12,7 @@ This repository contains various Rust examples that I use to learn new things.
 - [Conversions](./src/conversions.rs) -> Examples using conversions to JSON using `serde_json`.
 - [Concurrency](./src/concurrency.rs) -> Examples using threads, mutexes and Arcs.
 - [Clone on Write](./src/utils/cloneonwrite.rs) -> An example of a clone on write (Cow) Smart Pointer.
+- [Enum Linked List](./src/data_types/linked_list_enum.rs) -> An example of a linked list using only enums.
 - [Rust Test Suit](./src/utils/testrust.rs) -> A test suit to test the Rust code.
 
 
