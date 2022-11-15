@@ -1,5 +1,5 @@
 use std::fmt::{Display, Formatter};
-
+use std::io::Write;
 #[derive(Debug)]
 pub enum User<T> {
     Active,
