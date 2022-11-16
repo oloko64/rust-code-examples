@@ -6,22 +6,19 @@
   <p>{{ greetMsg }}</p>
 
   <div>
-    <input style="margin-right: 20px;" type="file" ref="doc" @change="readFile" />
-    <input v-model="fileName" type="text" placeholder="Name your file here" />
+    <button @click="openFile()">Open File</button>
+    <h3>{{ filePath }}</h3>
+    <button @click="saveFile()">Save</button>
   </div>
 
-  <button @click.prevent="saveFile">Save File</button>
   <button @click.prevent="openWindow">Open Second Window</button>
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from "vue";
+import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/tauri";
 import { WebviewWindow } from "@tauri-apps/api/window";
-
-interface FileData {
-  files: Blob[];
-}
+import { open, save } from "@tauri-apps/api/dialog";
 
 function openWindow() {
   // https://tauri.app/v1/guides/features/multiwindow#create-a-window-in-javascript
@@ -33,54 +30,46 @@ function openWindow() {
   });
 
   // since the webview window is created asynchronously,
-// Tauri emits the `tauri://created` and `tauri://error` to notify you of the creation response
-webview.once('tauri://created', function () {
-  // webview window successfully created
-})
-webview.once('tauri://error', function (e) {
-  // an error happened creating the webview window
-})
+  // Tauri emits the `tauri://created` and `tauri://error` to notify you of the creation response
+  webview.once("tauri://created", function () {
+    // webview window successfully created
+  });
+  webview.once("tauri://error", function (e) {
+    // an error happened creating the webview window
+  });
 }
 
 const greetMsg = ref("");
 const name = ref("");
-const fileContents = ref("");
-const doc: Ref<FileData> = ref({ files: [] });
-const fileName = ref("");
+const filePath = ref("");
 
 async function greet() {
   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
   greetMsg.value = await invoke("greet", { name: name.value });
 }
 
-function readFile() {
-  const file = doc?.value?.files[0];
-  const reader = new FileReader();
-  reader.onload = (res) => {
-    if (!res?.target?.result) {
-      alert("Error reading file");
-      return;
-    }
-    const resultString = res.target.result as string;
-    const start = resultString.split(",", 1) + ",";
-    fileContents.value = resultString.replace(start, "");
-  };
-  reader.readAsDataURL(file);
+async function openFile() {
+  const selected = await open();
+  if (Array.isArray(selected)) {
+    // user selected multiple files
+  } else if (selected === null) {
+    // user cancelled the selection
+  } else {
+    filePath.value = selected;
+    // user selected a single file
+  }
 }
 
 async function saveFile() {
-  if (!fileName.value) {
-    alert("Please enter a file name");
-    return;
-  }
-  const res: boolean = await invoke("save_file", {
-    content: fileContents.value,
-    fileName: fileName.value,
-  });
-  if (res) {
+  const savePath = await save();
+
+  // Loading the file to Javascript is unnecessary, since we can read and write directly inside Rust, this is a demo only.
+  const file_bytes = await invoke("read_file", { path: filePath.value });
+  try {
+    await invoke("save_file", { content: file_bytes, fileName: savePath });
     alert("File saved successfully");
-  } else {
-    alert("Error saving file");
+  } catch (err) {
+    console.log(err);
   }
 }
 </script>
