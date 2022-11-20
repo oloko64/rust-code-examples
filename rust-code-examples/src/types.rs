@@ -73,6 +73,7 @@ impl Configuration {
     #[must_use = "This function returns a new instance of the configuration"]
     pub fn new<T>(config_path: T) -> Configuration
     where
+        //By using trait bounds we can accept arguments of different types as long as they can be converted to the specified type T.
         T: AsRef<str>,
     {
         let data = Self::read_configuration(config_path.as_ref())
