@@ -56,6 +56,7 @@ fn parallel_test() {
 
 // This is a mix of various tests that I've done to learn Rust.
 fn main () {
+    // let _config = types::Configuration::new("path");
     types::user_state(3);
     // Linked List example
     let mut list = data_types::linked_list_enum::LinkedList::new();
