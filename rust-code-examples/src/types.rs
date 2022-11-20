@@ -73,11 +73,11 @@ impl Configuration {
     // Generally is not a good practice to require a lot of parameters here. In this case only 1 is required.
     #[must_use = "This function returns a new instance of the configuration"]
     pub fn new(config_path: &str) -> Configuration {
-        let data = Configuration::read_configuration(config_path)
+        let data = Self::read_configuration(config_path)
             .expect("Failed to read configuration file");
-        let last_modified = Configuration::get_last_modified(config_path)
+        let last_modified = Self::get_last_modified(config_path)
             .expect("Failed to get last modified time");
-        let modified_by = Configuration::get_modified_by(config_path).expect("Failed to get modified by");
+        let modified_by = Self::get_modified_by(config_path).expect("Failed to get modified by");
         
         // After all the data is collected, we can create a new instance of the struct and return it.
         Configuration {
