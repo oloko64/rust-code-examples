@@ -6,6 +6,12 @@ pub enum LinkedList<T> {
     Elem(T, Box<LinkedList<T>>),
 }
 
+impl<T> Default for LinkedList<T> {
+    fn default() -> Self {
+        LinkedList::Empty
+    }
+}
+
 // This implementation of LinkedList does not require T to derive Clone
 // It use mem::replace to swap the current node with the next one
 impl<T> LinkedList<T> {
@@ -28,13 +34,13 @@ impl<T> LinkedList<T> {
 
     /// Add a new element to the front of the LinkedList
     pub fn push_front(&mut self, elem: T) {
-        let new_list = LinkedList::Elem(elem, Box::new(mem::replace(self, LinkedList::Empty)));
+        let new_list = LinkedList::Elem(elem, Box::new(mem::take(self)));
         *self = new_list;
     }
 
     /// Remove the first element of the LinkedList and return it
     pub fn pop(&mut self) -> Option<T> {
-        match mem::replace(self, LinkedList::Empty) {
+        match mem::take(self) {
             LinkedList::Empty => None,
             LinkedList::Elem(elem, next) => {
                 *self = *next;
