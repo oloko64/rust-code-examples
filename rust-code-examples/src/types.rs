@@ -60,7 +60,6 @@ pub fn user_state(code: u8) -> User<String> {
     }
 }
 
-
 // Is very important to define your data structure correctly, this saves a lot of time from doing a lot of refactoring.
 pub struct Configuration {
     data: String,
@@ -72,13 +71,17 @@ impl Configuration {
     // This is a constructor, it is used to create a new instance of the struct.
     // Generally is not a good practice to require a lot of parameters here. In this case only 1 is required.
     #[must_use = "This function returns a new instance of the configuration"]
-    pub fn new(config_path: &str) -> Configuration {
-        let data = Self::read_configuration(config_path)
+    pub fn new<T>(config_path: T) -> Configuration
+    where
+        T: AsRef<str>,
+    {
+        let data = Self::read_configuration(config_path.as_ref())
             .expect("Failed to read configuration file");
-        let last_modified = Self::get_last_modified(config_path)
+        let last_modified = Self::get_last_modified(config_path.as_ref())
             .expect("Failed to get last modified time");
-        let modified_by = Self::get_modified_by(config_path).expect("Failed to get modified by");
-        
+        let modified_by =
+            Self::get_modified_by(config_path.as_ref()).expect("Failed to get modified by");
+
         // After all the data is collected, we can create a new instance of the struct and return it.
         Configuration {
             data,
