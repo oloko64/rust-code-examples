@@ -62,6 +62,7 @@
 
 - [jsonwebtoken](https://crates.io/crates/jsonwebtoken) -> Create and decode JWTs in a strongly typed way.
 - [sentry](https://crates.io/crates/sentry) -> Sentry (getsentry.com) client for rust ;)
+- [futures](https://crates.io/crates/futures) -> An implementation of futures and streams featuring zero allocations, composability, and iterator-like interfaces.
 - [axum](https://crates.io/crates/axum) -> Web framework that focuses on ergonomics and modularity.
 - [axum-auth](https://crates.io/crates/axum-auth) -> High-level http auth extractors for axum.
 - [actix-web](https://crates.io/crates/actix-web) -> Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust.
@@ -72,6 +73,9 @@
 - [ureq](https://crates.io/crates/ureq) -> Simple, safe HTTP client.
 - [wasm-bindgen](https://crates.io/crates/wasm-bindgen) -> Easy support for interacting between JS and Rust.
 - [lettre](https://crates.io/crates/lettre) -> Email client.
+- [lambda-web](https://crates.io/crates/lambda-web) -> Run Rust web frameworks on AWS Lambda.
+- [lambda_http](https://crates.io/crates/lambda_http) -> Application Load Balancer and API Gateway event types for AWS Lambda.
+- [lambda_runtime](https://crates.io/crates/lambda_runtime) -> AWS Lambda Runtime.
 
 # GUI
 
@@ -82,6 +86,7 @@
 
 - [owo-colors](https://crates.io/crates/owo-colors) -> Zero-allocation terminal colors that'll make people go owo.
 - [termcolor](https://crates.io/crates/termcolor) -> A simple cross platform library for writing colored text to a terminal.
+- [colored](https://crates.io/crates/colored) -> The most simple way to add colors in your terminal.
 - [colorful](https://crates.io/crates/colorful) -> Make your terminal output colorful.
 - [comfy-table](https://crates.io/crates/comfy-table) -> An easy to use library for building beautiful tables with automatic content wrapping.
 - [prettytable-rs](https://crates.io/crates/prettytable-rs) -> A library for printing pretty formatted tables in terminal.
