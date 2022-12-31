@@ -1,4 +1,4 @@
-use std::{collections::HashSet, ptr, time::Duration, thread};
+use std::{collections::HashSet, ptr, time::Duration, thread, cell::RefCell, rc::Rc};
 mod utils;
 mod data_types;
 use types::User;
@@ -56,6 +56,15 @@ fn parallel_test() {
 
 // This is a mix of various tests that I've done to learn Rust.
 fn main () {
+    clone_mutable_reference();
+
+    let mut linked_official = std::collections::LinkedList::new();
+    let teste = String::from("teste");
+    linked_official.push_back(teste);
+    // println!("{:?}", teste);
+
+
+
     // let _config = types::Configuration::new("path");
     types::user_state(3);
     // Linked List example
@@ -133,6 +142,16 @@ fn main () {
     // A example of the Clone on Write (Cow).
     utils::cloneonwrite::run_cow();
 
+    let teste: &str;
+    let mut vec = vec!["1", "2", "3"];
+    {
+        teste = "test";
+        let teste2 = "oi";
+        test(&mut vec, teste);
+        test(&mut vec, teste2);
+    }
+    println!("{:?}", vec);
+
     dbg!(random::try_for_each_example(vec!["1", "2", "3", "as"]));
 }
 
@@ -190,6 +209,34 @@ fn print_loops() {
         }
         println!("{}", out);
     }
+}
+
+fn clone_mutable_reference() {
+    // Creates a reference counter with a RefCell with the value 1.
+    let a = Rc::new(RefCell::new(1));
+
+    // Creates a new reference counter with a RefCell with the value 1.
+    let b = Rc::clone(&a);
+
+    // Changes the value of the RefCell to 2.
+    *a.borrow_mut() = 2;
+
+    // The value of `a` is 2 and the value of `b` is 2.
+    println!("a: {}, b: {}", a.borrow(), b.borrow());
+
+    // ############################################
+
+    // Creates a RefCell with the value 1.
+    let c = RefCell::new(1);
+
+    // Creates a new RefCell with the value 1.
+    let d = RefCell::clone(&c);
+
+    // Changes the value of the RefCell to 2.
+    *c.borrow_mut() = 2;
+
+    // The value of `c` is 2 and the value of `d` is 1.
+    println!("c: {}, d: {}", c.borrow(), d.borrow());
 }
 
 // How to test a function even if they are private.
