@@ -56,6 +56,8 @@ fn parallel_test() {
 
 // This is a mix of various tests that I've done to learn Rust.
 fn main () {
+
+    utils::ref_cell::test_ref_cell();
     clone_mutable_reference();
 
     let mut linked_official = std::collections::LinkedList::new();
