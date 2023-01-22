@@ -1,5 +1,4 @@
-
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 // This is a struct that will be used to test the serialization and deserialization.
 #[derive(Serialize, Deserialize, Debug)]

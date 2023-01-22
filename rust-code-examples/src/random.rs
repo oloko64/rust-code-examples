@@ -24,9 +24,12 @@ pub fn random() {
 
     // let results = [Ok(1), Err("nope"), Ok(3), Err("bad")];
     // let result: Result<Vec<_>, &str> = results.iter().cloned().collect();
-    
+
     // https://www.reddit.com/r/rust/comments/r6dpkz/using_result_inside_a_map_closure/
-    let vec_int = vec_str.into_iter().map(|i| i.parse::<i32>()).collect::<Result<Vec<_>, ParseIntError>>();
+    let vec_int = vec_str
+        .into_iter()
+        .map(|i| i.parse::<i32>())
+        .collect::<Result<Vec<_>, ParseIntError>>();
 
     println!("{:?}", teste);
 
@@ -118,7 +121,6 @@ fn my_sort(mut arr: Vec<i32>) -> Vec<i32> {
     }
     arr
 }
-
 
 // Using try_for_each to iterate over a vector and return an error if the value is not a number.
 pub fn try_for_each_example(arr: Vec<&str>) -> Vec<i32> {

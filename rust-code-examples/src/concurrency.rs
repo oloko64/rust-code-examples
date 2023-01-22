@@ -1,10 +1,13 @@
-use std::{thread, sync::{Mutex, Arc}};
+use std::{
+    sync::{Arc, Mutex},
+    thread,
+};
 
 /// A example of various thread implementations.
 pub fn threads() {
     // Thread example
     let thread_value = 3;
-    let handle = thread::spawn(move ||{
+    let handle = thread::spawn(move || {
         println!("Hello from a thread!");
         thread_value
     });
@@ -16,7 +19,7 @@ pub fn threads() {
     let mut threads = Vec::with_capacity(10);
 
     for i in 0..10 {
-        threads.push( thread::spawn(move || {
+        threads.push(thread::spawn(move || {
             println!("Hello from a thread! {i:?}");
         }));
     }

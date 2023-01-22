@@ -1,15 +1,15 @@
-use std::{collections::HashSet, ptr, time::Duration, thread, cell::RefCell, rc::Rc};
-mod utils;
+use std::{cell::RefCell, collections::HashSet, ptr, rc::Rc, thread, time::Duration};
 mod data_types;
+mod utils;
+use rayon::prelude::*;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
-use rayon::prelude::*;
-mod random;
-mod conversions;
 mod concurrency;
+mod conversions;
 mod hashmaps;
-mod types;
 mod lifetimes;
+mod random;
+mod types;
 
 struct Car {
     name: String,
@@ -30,10 +30,7 @@ enum Event {
 
 impl Car {
     fn new(name: String, year: i32) -> Car {
-        Car {
-            name,
-            year,
-        }
+        Car { name, year }
     }
 
     fn drive(&self) {
@@ -55,8 +52,7 @@ fn parallel_test() {
 }
 
 // This is a mix of various tests that I've done to learn Rust.
-fn main () {
-
+fn main() {
     utils::ref_cell::test_ref_cell();
     clone_mutable_reference();
 
@@ -64,8 +60,6 @@ fn main () {
     let teste = String::from("teste");
     linked_official.push_back(teste);
     // println!("{:?}", teste);
-
-
 
     // let _config = types::Configuration::new("path");
     types::user_state(3);
@@ -101,7 +95,7 @@ fn main () {
 
     println!("{}", utils::testrust::second_number(3));
 
-    'a:loop {
+    'a: loop {
         loop {
             loop {
                 break 'a;
@@ -109,7 +103,7 @@ fn main () {
         }
     }
     // let cl = () => {}
-    let cl = |x: i32| {x + 3};
+    let cl = |x: i32| x + 3;
     cl(3);
 
     // random::random();
@@ -168,7 +162,7 @@ fn question(st: &str) {
     let mut set: HashSet<&str> = HashSet::new();
     for i in 0..st.len() {
         for j in i..st.len() {
-            set.insert(&st[i..j+1]);
+            set.insert(&st[i..j + 1]);
         }
     }
     // Convert the HashSet into a vector as HashSet does not implement the sort method.
@@ -176,7 +170,6 @@ fn question(st: &str) {
     vec.sort();
     println!("{:?}", vec.last().unwrap());
 }
-
 
 fn iterate_strings() {
     // Not the correct way as may be errors depending on the char, as UTF-8 is not a fixed size of one byte.

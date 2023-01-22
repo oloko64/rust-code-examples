@@ -1,11 +1,10 @@
 use std::collections::HashMap;
 use std::collections::HashSet;
 use std::error::Error;
-use std::fs::File;
 use std::fs::read_to_string;
+use std::fs::File;
 use std::io::Read;
 use std::process;
-
 
 // Reference: https://doc.rust-lang.org/std/collections/struct.HashMap.html
 // Reference: https://doc.rust-lang.org/std/collections/struct.HashSet.html
@@ -53,7 +52,12 @@ pub fn hashmaps() {
     };
     println!("{}", teste());
     // Prints the review or print that nothing was found for that key.
-    println!("{}", book_reviews.get("Adventures of Huckleberry Finns").unwrap_or(&"Nothing found".to_string()));
+    println!(
+        "{}",
+        book_reviews
+            .get("Adventures of Huckleberry Finns")
+            .unwrap_or(&"Nothing found".to_string())
+    );
 
     if let Err(e) = run("src/main.rs".to_string()) {
         println!("Application error: {}", e);
@@ -63,7 +67,7 @@ pub fn hashmaps() {
 }
 
 /// A simple file reader example that returns a Result.
-pub fn run(filename: String) -> Result<(), Box<dyn Error>>{
+pub fn run(filename: String) -> Result<(), Box<dyn Error>> {
     let mut f = File::open(filename)?;
 
     let mut contents = String::new();
