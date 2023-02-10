@@ -1,9 +1,12 @@
 use std::{cell::RefCell, collections::HashSet, ptr, rc::Rc, thread, time::Duration};
 mod data_types;
 mod utils;
+mod traits;
 use rayon::prelude::*;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
+
+use crate::traits::test_trait;
 mod concurrency;
 mod conversions;
 mod hashmaps;
@@ -53,6 +56,8 @@ fn parallel_test() {
 
 // This is a mix of various tests that I've done to learn Rust.
 fn main() {
+    test_trait();
+
     utils::ref_cell::test_ref_cell();
     clone_mutable_reference();
 
