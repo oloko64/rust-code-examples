@@ -2,6 +2,7 @@ use std::{cell::RefCell, collections::HashSet, ptr, rc::Rc, thread, time::Durati
 mod data_types;
 mod utils;
 mod traits;
+mod singleton;
 use rayon::prelude::*;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
@@ -56,6 +57,8 @@ fn parallel_test() {
 
 // This is a mix of various tests that I've done to learn Rust.
 fn main() {
+
+    singleton::test_singleton();
     test_trait();
 
     utils::ref_cell::test_ref_cell();
