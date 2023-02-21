@@ -17,10 +17,13 @@ impl Image {
     pub fn new_from_path(path: &str) -> Result<Image, Box<dyn Error>> {
         let img = image::open(path)?;
         let (width, height) = img.dimensions();
-        let mut pixels = Vec::new();
-        for pixel in img.pixels() {
-            pixels.push(Pixel(pixel.2[0], pixel.2[1], pixel.2[2]));
-        }
+        let pixels = img
+            .pixels()
+            .map(|pixel| {
+                let rgb = pixel.2;
+                Pixel(rgb[0], rgb[1], rgb[2])
+            })
+            .collect::<Vec<_>>();
         Ok(Image {
             pixels,
             width,
@@ -58,14 +61,14 @@ impl Image {
             for i in -radius as i32..radius as i32 {
                 for j in -radius as i32..radius as i32 {
                     let width = (index as i32 % self.width as i32) + i;
-                    let heigth = (index as i32 / self.width as i32) + j;
+                    let height = (index as i32 / self.width as i32) + j;
                     if width >= 0
                         && width < self.width as i32
-                        && heigth >= 0
-                        && heigth < self.height as i32
+                        && height >= 0
+                        && height < self.height as i32
                         && (f64::from(i)).powi(2) + (f64::from(j)).powi(2) <= radius.powi(2)
                     {
-                        let p = &self.pixels[(heigth * self.width as i32 + width) as usize];
+                        let p = &self.pixels[(height * self.width as i32 + width) as usize];
                         red += i32::from(p.0);
                         green += i32::from(p.1);
                         blue += i32::from(p.2);

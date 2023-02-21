@@ -1,7 +1,7 @@
-mod image;
+use image_processing::Image;
 
 fn main() {
-    let mut img = image::Image::new_from_path("imgs/rgby.png").unwrap();
+    let mut img = Image::new_from_path("imgs/rgby.png").unwrap();
 
     // println!("{:#?}", img);
 
