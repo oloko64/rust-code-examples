@@ -9,4 +9,4 @@ edition = "2021"
 time = { version = "0.3.20", features = ["macros"] }
 tracing = "0.1.37"
 tracing-appender = "0.2.2"
-tracing-subscriber = { version = "0.3.16", features = ["local-time"] }
+tracing-subscriber = { version = "0.3.16", features = ["local-time", "env-filter"] }

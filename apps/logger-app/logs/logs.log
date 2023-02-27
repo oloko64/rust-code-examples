@@ -3,26 +3,3 @@
 26-02-2023 22:05:40  INFO logger_app: Hello, world!
 26-02-2023 22:05:40  WARN logger_app: Hello, world!
 26-02-2023 22:10:55  INFO logger_app: Hello, world!
-26-02-2023 22:10:55  WARN logger_app: Hello, world!
-26-02-2023 22:10:57  INFO logger_app: Hello, world!
-26-02-2023 22:10:57  WARN logger_app: Hello, world!
-26-02-2023 22:10:58  INFO logger_app: Hello, world!
-26-02-2023 22:10:58  WARN logger_app: Hello, world!
-26-02-2023 22:10:59  INFO logger_app: Hello, world!
-26-02-2023 22:10:59  WARN logger_app: Hello, world!
-26-02-2023 22:11:00  INFO logger_app: Hello, world!
-26-02-2023 22:11:00  WARN logger_app: Hello, world!
-26-02-2023 22:11:08  INFO logger_app: Hello, world!
-26-02-2023 22:11:08  WARN logger_app: Hello, world!
-26-02-2023 22:11:08  INFO logger_app: Hello, world!
-26-02-2023 22:11:08  WARN logger_app: Hello, world!
-26-02-2023 22:14:13  INFO logger_app: Hello, world!
-26-02-2023 22:14:13  WARN logger_app: Hello, world!
-26-02-2023 22:17:53  INFO logger_app: Hello, world!
-26-02-2023 22:17:53  WARN logger_app: Hello, world!
-26-02-2023 22:17:54  INFO logger_app: Hello, world!
-26-02-2023 22:17:54  WARN logger_app: Hello, world!
-26-02-2023 22:17:57  INFO logger_app: Hello, world!
-26-02-2023 22:17:57  WARN logger_app: Hello, world!
-26-02-2023 22:19:21  INFO logger_app: Hello, world!
-26-02-2023 22:19:21  WARN logger_app: Hello, world Two!
