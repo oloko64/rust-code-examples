@@ -1,114 +1,77 @@
+mod errors;
+mod middlewares;
+mod routes;
+
+use crate::middlewares::validate_body;
 use axum::{
-    body::{BoxBody, self, Full, Bytes},
-    middleware::{self, Next},
-    response::{IntoResponse, Response},
+    body, middleware,
     routing::{get, post},
-    Json, Router,
+    Router,
 };
-use hyper::{Request, StatusCode};
-use serde::Deserialize;
-use serde_json::json;
+use hyper::{header, Method};
+use lambda_web::{is_running_on_lambda, run_hyper_on_lambda};
+use routes::print_body;
+use std::net::SocketAddr;
 use tower::ServiceBuilder;
-use tower_http::{ServiceBuilderExt, trace::TraceLayer};
-use tracing::{debug, info};
+use tower_http::{
+    cors::{self, CorsLayer},
+    trace::TraceLayer,
+    ServiceBuilderExt,
+};
+use tracing::{info, metadata::LevelFilter};
+use tracing_subscriber::{
+    prelude::__tracing_subscriber_SubscriberExt, util::SubscriberInitExt, EnvFilter,
+};
 
-#[derive(Deserialize)]
-struct BodyParams {
-    name: String,
-    age: u32,
-}
-
-enum CustomErrors {
-    BadRequest(String),
-    // InternalServerError(String),
-}
-
-impl IntoResponse for CustomErrors {
-    fn into_response(self) -> Response {
-        match self {
-            CustomErrors::BadRequest(message) => (
-                StatusCode::BAD_REQUEST,
-                Json(json!({
-                    "message": message,
-                })),
-            )
-                .into_response(),
-            // CustomErrors::InternalServerError(message) => (
-            //     StatusCode::INTERNAL_SERVER_ERROR,
-            //     Json(json!({
-            //         "message": message,
-            //     })),
-            // )
-            //     .into_response(),
-        }
-    }
-}
-
-async fn print_body(Json(body): Json<BodyParams>) -> Result<impl IntoResponse, CustomErrors> {
-    if body.age < 18 {
-        return Err(CustomErrors::BadRequest("You are too young!".to_string()));
-    }
-
-    Ok(Json(json!({
-        "message": format!("Hello, {}!", body.name),
-        "age": body.age,
-    })))
-}
-
-// middleware that shows how to consume the request body upfront
-async fn validate_body(
-    request: Request<BoxBody>,
-    next: Next<BoxBody>,
-) -> Result<impl IntoResponse, Response> {
-    let request = buffer_request_body(request).await?;
-
-    // Check headers
-    info!("headers: {:?}", request.headers());
-
-    Ok(next.run(request).await)
-}
-
-// the trick is to take the request apart, buffer the body, do what you need to do, then put
-// the request back together
-async fn buffer_request_body(request: Request<BoxBody>) -> Result<Request<BoxBody>, Response> {
-    let (parts, body) = request.into_parts();
-
-    // this wont work if the body is an long running stream
-    let bytes = hyper::body::to_bytes(body)
-        .await
-        .map_err(|err| (StatusCode::INTERNAL_SERVER_ERROR, err.to_string()).into_response())?;
-
-    // Do something with the body
-    do_thing_with_request_body(bytes.clone());
-
-    Ok(Request::from_parts(parts, body::boxed(Full::from(bytes))))
-}
-
-fn do_thing_with_request_body(bytes: Bytes) {
-    info!(body = ?bytes);
-}
+const PORT: u16 = 3000;
+const ADDR_IPV4: [u8; 4] = [0, 0, 0, 0];
 
 #[tokio::main]
 async fn main() {
-    tracing_subscriber::fmt()
-        .with_max_level(tracing::Level::DEBUG)
+    // load .env file
+    dotenvy::dotenv().ok();
+
+    // initialize tracing
+    tracing_subscriber::registry()
+        .with(
+            EnvFilter::builder()
+                .with_default_directive(LevelFilter::INFO.into())
+                .from_env_lossy(),
+        )
+        .with(tracing_subscriber::fmt::layer())
         .init();
 
     // build our application with a single route
     let app = Router::new()
-        .route("/", get(|| async { "Hello, World!" }))
         .route("/name", post(print_body))
-        .layer(TraceLayer::new_for_http())
+        // add this middleware to just the above routes, the order is bottom to top
         .layer(
             ServiceBuilder::new()
                 .map_request_body(body::boxed)
                 .layer(middleware::from_fn(validate_body)),
-        );
+        )
+        .route("/", get(|| async { "Hello, World!" }))
+        .layer(
+            CorsLayer::new()
+                // .allow_origin("http://localhost:3000".parse::<HeaderValue>().unwrap())
+                .allow_origin(cors::Any)
+                .allow_methods([Method::GET, Method::POST])
+                // It is required to add ".allow_headers([http::header::CONTENT_TYPE])"
+                // See this issue https://github.com/tokio-rs/axum/issues/849
+                .allow_headers([header::CONTENT_TYPE]),
+        )
+        .layer(TraceLayer::new_for_http());
 
-    debug!("Starting server on http://localhost:3000");
-    // run it with hyper on localhost:3000
-    axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())
-        .serve(app.into_make_service())
-        .await
-        .unwrap();
+    if is_running_on_lambda() {
+        info!("Starting server on AWS lambda");
+        run_hyper_on_lambda(app).await.unwrap();
+    } else {
+        info!("Starting server on http://localhost:{}", PORT);
+        // run it with hyper on localhost:3000
+        let addr = SocketAddr::from((ADDR_IPV4, PORT));
+        axum::Server::bind(&addr)
+            .serve(app.into_make_service())
+            .await
+            .unwrap();
+    }
 }
