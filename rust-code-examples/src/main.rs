@@ -3,11 +3,12 @@ mod data_types;
 mod utils;
 mod traits;
 mod singleton;
+mod new_type;
 use rayon::prelude::*;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
 
-use crate::traits::test_trait;
+use crate::{traits::test_trait, new_type::{important_num_consumer, important_num_generator, important_num_generator_new_type, important_num_consumer_new_type}};
 mod concurrency;
 mod conversions;
 mod hashmaps;
@@ -57,6 +58,12 @@ fn parallel_test() {
 
 // This is a mix of various tests that I've done to learn Rust.
 fn main() {
+    let generic_f64 = important_num_generator(32.0);
+    important_num_consumer(generic_f64);
+
+    let new_type = important_num_generator_new_type(32.0);
+    important_num_consumer_new_type(new_type);
+
 
     singleton::test_singleton();
     test_trait();
