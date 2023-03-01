@@ -11,8 +11,10 @@ pub fn important_num_consumer(num: f64) {
 
 // --------------------------------------------
 
-// Defining a new type
-pub struct ImportantNumber(f64);
+// https://www.lurklurk.org/effective-rust/newtype.html
+
+/// Defining a new type
+pub struct ImportantNumber(pub f64);
 
 /// In this case the function returns a new type
 pub fn important_num_generator_new_type(num: f64) -> ImportantNumber {
