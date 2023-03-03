@@ -4,6 +4,7 @@ mod utils;
 mod traits;
 mod singleton;
 mod new_type;
+mod into;
 use rayon::prelude::*;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
