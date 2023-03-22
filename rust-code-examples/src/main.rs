@@ -5,12 +5,13 @@ mod traits;
 mod singleton;
 mod new_type;
 mod into_from;
+mod concurrency;
 use rayon::prelude::*;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
 
 use crate::{traits::test_trait, new_type::{important_num_consumer, important_num_generator, important_num_generator_new_type, important_num_consumer_new_type}};
-mod concurrency;
+mod parallelism;
 mod conversions;
 mod hashmaps;
 mod lifetimes;

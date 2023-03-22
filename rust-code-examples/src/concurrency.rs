@@ -1,52 +1,27 @@
-use std::{
-    sync::{Arc, Mutex},
-    thread,
-};
-
-/// A example of various thread implementations.
-pub fn threads() {
-    // Thread example
-    let thread_value = 3;
-    let handle = thread::spawn(move || {
-        println!("Hello from a thread!");
-        thread_value
-    });
-    println!("Waiting for thread to finish...");
-    let value = handle.join().unwrap();
-    println!("Thread finished with value: {}", value);
-
-    // Multiple threads
-    let mut threads = Vec::with_capacity(10);
-
-    for i in 0..10 {
-        threads.push(thread::spawn(move || {
-            println!("Hello from a thread! {i:?}");
-        }));
-    }
-    for handle in threads {
-        handle.join().unwrap();
-    }
-
-    // Closure example
-    let data = vec![1, 2, 3];
-    let closure = || println!("captured {data:?} by value");
-    closure();
-    println!("captured {:?} by reference", data);
+/// Example of a Promise.all implementation in Rust.
+pub async fn call_all_futures() {
+    let futures = vec![
+        async_function(1),
+        async_function(2),
+        async_function(3),
+        async_function(4),
+        async_function(5),
+    ];
+    // This will execute all futures concurrently and return a vector of the results.
+    // The results will be in the same order as the futures.
+    // flatten() is used to flatten the Option<i32> into i32, getting rid of the None values.
+    let results = futures::future::join_all(futures)
+        .await
+        .into_iter()
+        .flatten()
+        .collect::<Vec<_>>();
+    println!("Results: {:?}", results);
 }
 
-/// Example of a thread that makes use of a mutex to prevent concurrent access to a resource.
-fn arcs_mutex() {
-    let v = Arc::new(Mutex::new(0));
-    let mut handles = Vec::new();
-    for _ in 0..10 {
-        let v = Arc::clone(&v);
-        let handle = thread::spawn(move || {
-            let mut data = v.lock().unwrap();
-            *data += 1;
-        });
-        handles.push(handle);
-    }
-    for handle in handles {
-        handle.join().unwrap();
+async fn async_function(num: i32) -> Option<i32> {
+    if num % 2 == 0 {
+        Some(num)
+    } else {
+        None
     }
 }
