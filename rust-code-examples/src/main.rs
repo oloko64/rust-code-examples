@@ -6,6 +6,7 @@ mod singleton;
 mod new_type;
 mod into_from;
 mod concurrency;
+mod multiple_tokio_worker_types;
 use rayon::prelude::*;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
