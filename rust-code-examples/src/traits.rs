@@ -74,3 +74,111 @@ fn print_trait_dyn(truck: Box<dyn TruckTrait>) {
     println!("Model: {}", truck.get_model());
     println!("Capacity: {}", truck.get_capacity());
 }
+
+// ------------------------------------------------------------------------------------------------
+
+trait Human {
+    fn eat(&self);
+    fn sleep(&self);
+}
+
+// This is another way of implementing trait, without using blanket implementation
+// trait SuperHuman: Human {
+//     fn fly(&self);
+// }
+
+// impl Human for Superman {
+//     fn eat(&self) {
+//         println!("Human eats");
+//     }
+
+//     fn sleep(&self) {
+//         println!("Human sleeps");
+//     }
+// }
+
+trait SuperHuman {
+    fn fly(&self);
+}
+// This is called blanket implementation
+impl<U: SuperHuman> Human for U {
+    fn eat(&self) {
+        println!("Human eats");
+    }
+
+    fn sleep(&self) {
+        println!("Human sleeps");
+    }
+}
+
+struct Superman;
+
+impl SuperHuman for Superman {
+    fn fly(&self) {
+        println!("Superman flies");
+    }
+}
+
+fn main_two() {
+    let superman = Superman;
+    superman.eat();
+    superman.sleep();
+    superman.fly();
+}
+
+// ------------------------------------------------------------------------------------------------
+
+#[derive(Debug)]
+struct MyError {
+    code: u32,
+}
+
+impl std::error::Error for MyError {
+    fn description(&self) -> &str {
+        "MyError"
+    }
+}
+
+impl std::fmt::Display for MyError {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f, "MyError: {}", self.code)
+    }
+}
+
+fn my_error_test() -> Result<(), Box<dyn std::error::Error>> {
+    if true {
+        return Err(MyError { code: 1 }.into());
+    } else {
+        return Ok(());
+    }
+}
+
+// ------------------------------------------------------------------------------------------------
+
+trait MyErrorTrait {
+    fn code(&self) -> u32;
+}
+
+struct MyErrorTraitTest {
+    code: u32,
+}
+
+impl MyErrorTrait for MyErrorTraitTest {
+    fn code(&self) -> u32 {
+        self.code
+    }
+}
+
+impl Into<Box<dyn MyErrorTrait>> for MyErrorTraitTest {
+    fn into(self) -> Box<dyn MyErrorTrait> {
+        Box::new(self)
+    }
+}
+
+fn my_error_trait_test() -> Result<(), Box<dyn MyErrorTrait>> {
+    if true {
+        return Err(MyErrorTraitTest { code: 1 }.into());
+    } else {
+        return Ok(());
+    }
+}
