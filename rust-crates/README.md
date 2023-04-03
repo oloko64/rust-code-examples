@@ -13,6 +13,7 @@
 # Hash
 
 - [md5](https://crates.io/crates/md5) -> The package provides the MD5 hash function.
+- [sha2](https://crates.io/crates/sha2) -> Pure Rust implementation of the SHA-2 hash function family including SHA-224, SHA-256, SHA-384, and SHA-512.
 
 # Rust Additions
 
@@ -31,6 +32,14 @@
 - [anyhow](https://crates.io/crates/anyhow) -> Flexible concrete Error type built on std::error::Error.
 - [thiserror](https://crates.io/crates/thiserror) -> This library provides a convenient derive macro for the standard library's `std::error::Error` trait.
 - [derive_more](https://crates.io/crates/derive_more) -> Adds #[derive(x)] macros for more traits.
+- [derive_builder](https://crates.io/crates/derive_builder) -> Rust macro to automatically implement the builder pattern for arbitrary structs.
+- [bitvec](https://crates.io/crates/bitvec) -> Addresses memory by bits, for packed collections and bitfields.
+- [regex](https://crates.io/crates/regex) -> An implementation of regular expressions for Rust. This implementation uses finite automata and guarantees linear time matching on all inputs.
+- [lazy-regex](https://crates.io/crates/lazy-regex) -> lazy static regular expressions checked at compile time.
+- [confy](https://crates.io/crates/confy) -> Boilerplate-free configuration management.
+- [nuttype](https://crates.io/crates/nutype) -> The newtype with guarantees.
+- [toml](https://crates.io/crates/toml) -> A native Rust encoder and decoder of TOML-formatted files and streams. Provides implementations of the standard Serialize/Deserialize traits for TOML data to facilitate deserializing and serializing Rust structures.
+- [bstr](https://crates.io/crates/bstr) -> A string type that is not required to be valid UTF-8.
 
 # System
 
@@ -39,6 +48,7 @@
 - [humantime](https://crates.io/crates/humantime) -> A parser and formatter for std::time::{Duration, Sys
 - temTime}.
 - [notify](https://crates.io/crates/notify) -> Cross-platform filesystem notification library.
+- [notify-rust](https://crates.io/crates/notify-rust) -> Show desktop notifications (linux, bsd, mac). Pure Rust dbus client and server.
 - [regex](https://crates.io/crates/regex) -> An implementation of regular expressions for Rust. This implementation uses finite automata and guarantees linear time matching on all inputs.
 - [dotenvy](https://crates.io/crates/dotenvy) -> A well-maintained fork of the dotenv crate.
 ~~- [dotenv](https://crates.io/crates/dotenv) -> A `dotenv` implementation for Rust.~~
@@ -47,10 +57,17 @@
 - [dirs](https://crates.io/crates/dirs) -> A tiny low-level library that provides platform-specific standard locations of directories for config, cache and other data on Linux, Windows, macOS and Redox.
 - [directories](https://crates.io/crates/directories) -> A tiny mid-level library that provides platform-specific standard locations of directories for config, cache and other data on Linux, Windows and macOS.
 - [enigo](https://crates.io/crates/enigo) -> Enigo lets you control your mouse and keyboard in an abstract way on different operating systems (currently only Linux, macOS, Win – Redox and *BSD planned).
+- [globwalk](https://crates.io/crates/globwalk) -> Glob-matched recursive file system walking.
+- [glob](https://crates.io/crates/glob) -> Support for matching file paths against Unix shell style patterns.
 - [walkdir](https://crates.io/crates/walkdir) -> Recursively walk a directory.
 - [rand](https://crates.io/crates/rand) -> Random number generators and other randomness functionality.
 - [getrandom](https://crates.io/crates/getrandom) -> A small cross-platform library for retrieving random data from system source.
 - [unicode-segmentation](https://crates.io/crates/unicode-segmentation) -> This crate provides Grapheme Cluster, Word and Sentence boundaries according to Unicode Standard Annex #29 rules.
+- [config](https://crates.io/crates/config) -> Layered configuration system for Rust applications.
+- [figment](https://crates.io/crates/figment) -> A configuration library so con-free, it's unreal.
+- [tar](https://crates.io/crates/tar) -> A Rust implementation of a TAR file reader and writer. This library does not currently handle compression, but it is abstract over all I/O readers and writers. Additionally, great lengths are taken to ensure that the entire contents are never required to be entirely resident in memory all at once.
+- [flate2](https://crates.io/crates/flate2) -> DEFLATE compression and decompression exposed as Read/BufRead/Write streams. Supports miniz_oxide and multiple zlib implementations. Supports zlib, gzip, and raw deflate streams.
+- [signal-hook](https://crates.io/crates/signal-hook) -> Unix signal handling.
 
 # Databases
 
@@ -76,6 +93,14 @@
 - [lambda-web](https://crates.io/crates/lambda-web) -> Run Rust web frameworks on AWS Lambda.
 - [lambda_http](https://crates.io/crates/lambda_http) -> Application Load Balancer and API Gateway event types for AWS Lambda.
 - [lambda_runtime](https://crates.io/crates/lambda_runtime) -> AWS Lambda Runtime.
+- [poem-openapi](https://crates.io/crates/poem-openapi) -> OpenAPI support for Poem.
+- [fantoccini](https://crates.io/crates/fantoccini) -> High-level API for programmatically interacting with web pages through WebDriver.
+- [mockito](https://crates.io/crates/mockito) -> HTTP mocking for Rust.
+- [scraper](https://crates.io/crates/scraper) -> HTML parsing and querying with CSS selectors.
+
+# TUI
+
+- [tui](https://crates.io/crates/tui) -> A library to build rich terminal user interfaces or dashboards.
 
 # GUI
 
@@ -97,6 +122,11 @@
 - [serde](https://crates.io/crates/serde) -> Serde is a framework for serializing and deserializing Rust data structures efficiently and generically.
 - [serde_json](https://crates.io/crates/serde_json) -> A JSON serialization file format.
 - [bincode](https://crates.io/crates/bincode) -> A binary serialization / deserialization strategy for transforming structs into bytes and vice versa!
+- [bytesize](https://crates.io/crates/bytesize) -> An utility for human-readable bytes representations.
+- [humansize](https://crates.io/crates/humansize) -> A configurable crate to easily represent sizes in a human-readable format.
+- [fast_qr](https://crates.io/crates/fast_qr) -> Generates optimized QRCode.
+- [qrcode-generator](https://crates.io/crates/qrcode-generator) -> Generate QR Code matrices and images in RAW, PNG and SVG formats.
+- [qrcodegen](https://crates.io/crates/qrcodegen) -> High-quality QR Code generator library.
 
 # User interaction
 
@@ -120,3 +150,4 @@
 - [pretty_env_logger](https://crates.io/crates/pretty_env_logger) -> A visually pretty env_logger.
 - [stderrlog](https://crates.io/crates/stderrlog) -> Logger that logs to stderr based on verbosity specified.
 - [flexi_logger](https://crates.io/crates/flexi_logger) -> An easy-to-configure and flexible logger that writes logs to stderr or stdout and/or to files. It allows custom logline formats, and it allows changing the log specification at runtime. It also allows defining additional log streams, e.g. for alert or security messages.
+- [log4rs](https://crates.io/crates/log4rs) -> A highly configurable multi-output logging implementation for the `log` facade.
