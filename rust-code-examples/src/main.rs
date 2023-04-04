@@ -7,6 +7,7 @@ mod new_type;
 mod into_from;
 mod concurrency;
 mod multiple_tokio_worker_types;
+mod conditional_compilation;
 use rayon::prelude::*;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
