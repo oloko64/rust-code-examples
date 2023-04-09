@@ -1,22 +1,29 @@
 use std::{cell::RefCell, collections::HashSet, ptr, rc::Rc, thread, time::Duration};
-mod data_types;
-mod utils;
-mod traits;
-mod singleton;
-mod new_type;
-mod into_from;
+mod command_piped;
 mod concurrency;
-mod multiple_tokio_worker_types;
 mod conditional_compilation;
+mod data_types;
+mod into_from;
+mod multiple_tokio_worker_types;
+mod new_type;
+mod singleton;
+mod traits;
+mod utils;
 use rayon::prelude::*;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
 
-use crate::{traits::test_trait, new_type::{important_num_consumer, important_num_generator, important_num_generator_new_type, important_num_consumer_new_type}};
-mod parallelism;
+use crate::{
+    new_type::{
+        important_num_consumer, important_num_consumer_new_type, important_num_generator,
+        important_num_generator_new_type,
+    },
+    traits::test_trait,
+};
 mod conversions;
 mod hashmaps;
 mod lifetimes;
+mod parallelism;
 mod random;
 mod types;
 
@@ -67,7 +74,6 @@ fn main() {
 
     let new_type = important_num_generator_new_type(32.0);
     important_num_consumer_new_type(new_type);
-
 
     singleton::test_singleton();
     test_trait();

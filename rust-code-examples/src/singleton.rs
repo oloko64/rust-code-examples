@@ -1,4 +1,4 @@
-use std::{sync::Once, time, fmt};
+use std::{fmt, sync::Once, time};
 
 pub struct Singleton {
     date: String,
