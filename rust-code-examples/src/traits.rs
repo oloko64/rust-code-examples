@@ -155,10 +155,11 @@ fn my_error_test() -> Result<(), Box<dyn std::error::Error>> {
 
 // ------------------------------------------------------------------------------------------------
 
-trait MyErrorTrait {
+trait MyErrorTrait: std::error::Error {
     fn code(&self) -> u32;
 }
 
+#[derive(Debug)]
 struct MyErrorTraitTest {
     code: u32,
 }
@@ -166,6 +167,18 @@ struct MyErrorTraitTest {
 impl MyErrorTrait for MyErrorTraitTest {
     fn code(&self) -> u32 {
         self.code
+    }
+}
+
+impl std::fmt::Display for MyErrorTraitTest {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f, "MyErrorTraitTest: {}", self.code)
+    }
+}
+
+impl std::error::Error for MyErrorTraitTest {
+    fn description(&self) -> &str {
+        "MyErrorTraitTest"
     }
 }
 
@@ -180,5 +193,106 @@ fn my_error_trait_test() -> Result<(), Box<dyn MyErrorTrait>> {
         return Err(MyErrorTraitTest { code: 1 }.into());
     } else {
         return Ok(());
+    }
+}
+
+// ------------------------------------------------------------------------------------------------
+
+fn run_implementations() {
+    let test_val = Message::try_from("default").unwrap();
+
+    // This will return an error
+    // let test_val = Message::try_from("teste").unwrap();
+
+    implementation(test_val);
+    implementation(MessageStruct {
+        message: String::from("Test"),
+        number: 1,
+    });
+}
+
+fn implementation(val: impl TestTrait) {
+    println!("{}", &val);
+    dbg!(&val);
+    val.test_error().unwrap();
+}
+
+trait MyFrom<T>: Sized {
+    fn my_from(t: T) -> Self;
+}
+
+trait TestTrait: std::fmt::Display + std::fmt::Debug {
+    // This needs to be implemented as Debug is required by unwrap
+    type Error: std::fmt::Debug;
+
+    fn test_error(&self) -> Result<(), Self::Error>;
+}
+
+#[derive(Debug)]
+enum Message {
+    Test,
+    Default,
+}
+
+#[derive(Debug)]
+struct MessageStruct {
+    message: String,
+    number: u32,
+}
+
+impl TestTrait for MessageStruct {
+    type Error = String;
+
+    fn test_error(&self) -> Result<(), Self::Error> {
+        Ok(())
+    }
+}
+
+impl std::fmt::Display for MessageStruct {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Message: {}, Number: {}", self.message, self.number)
+    }
+}
+
+impl TestTrait for Message {
+    type Error = String;
+
+    fn test_error(&self) -> Result<(), Self::Error> {
+        // This will return an error if the message enum is Test
+        if let Message::Test = self {
+            return Err(String::from("Error"));
+        }
+        Ok(())
+    }
+}
+
+impl std::fmt::Display for Message {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Message::Test => write!(f, "Test"),
+            Message::Default => write!(f, "Default"),
+        }
+    }
+}
+
+impl MyFrom<String> for Message {
+    fn my_from(s: String) -> Self {
+        match s.as_str() {
+            "teste" => Message::Test,
+            _ => Message::Default,
+        }
+    }
+}
+
+impl TryFrom<&str> for Message {
+    // The Error from this trait does not implement Debug and still works with unwrap
+    // Needs to investigate why
+    type Error = ();
+
+    fn try_from(s: &str) -> Result<Self, Self::Error> {
+        match s {
+            "teste" => Ok(Message::Test),
+            _ => Ok(Message::Default),
+        }
     }
 }
