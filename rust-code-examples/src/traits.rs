@@ -296,3 +296,126 @@ impl TryFrom<&str> for Message {
         }
     }
 }
+
+// ------------------------------------------------------------------------------------------------
+
+use std::{io::Read, string::FromUtf8Error};
+
+fn run_trait_examples() -> Result<(), Box<dyn std::error::Error>> {
+    let mut file_1 = JsonFile::new();
+    file_1.read_file("file_json.json")?;
+
+    let mut file_2 = YamlFile::new();
+    file_2.read_file("file_yaml.yaml")?;
+
+    print_file_info(&file_1)?;
+    println!("----------------");
+    print_file_info(&file_2)?;
+
+    Ok(())
+}
+
+fn print_file_info(file: &impl MyFile) -> Result<(), Box<dyn std::error::Error>> {
+    println!("File type: {:?}", file.file_type());
+    // println!("File data: {:?}", file.data());
+    println!("File data: {:?}", file.data_as_string()?);
+    println!("File parsed data: {:?}", file.parsed_data()?);
+
+    Ok(())
+}
+
+#[derive(Debug)]
+enum FileType {
+    Json,
+    Yaml,
+}
+
+#[derive(Debug)]
+enum ParsedData {
+    Json(serde_json::Value),
+    Yaml(serde_yaml::Value),
+}
+
+trait MyFile: std::fmt::Debug {
+    fn new() -> Self;
+
+    fn read_file(&mut self, path: &str) -> Result<(), std::io::Error>;
+
+    fn data(&self) -> Vec<u8>;
+
+    fn data_as_string(&self) -> Result<String, FromUtf8Error> {
+        String::from_utf8(self.data())
+    }
+
+    fn parsed_data(&self) -> Result<ParsedData, std::io::Error>;
+
+    fn file_type(&self) -> FileType;
+}
+
+#[derive(Debug)]
+struct JsonFile {
+    data: Vec<u8>,
+}
+impl MyFile for JsonFile {
+    fn new() -> Self {
+        JsonFile { data: Vec::new() }
+    }
+
+    fn read_file(&mut self, path: &str) -> Result<(), std::io::Error> {
+        let mut file = std::fs::File::open(path)?;
+        let mut data = Vec::new();
+        file.read_to_end(&mut data)?;
+        self.data = data;
+        Ok(())
+    }
+
+    fn data(&self) -> Vec<u8> {
+        self.data.clone()
+    }
+
+    fn parsed_data(&self) -> Result<ParsedData, std::io::Error> {
+        let data = serde_json::from_slice(&self.data)?;
+        Ok(ParsedData::Json(data))
+    }
+
+    fn file_type(&self) -> FileType {
+        FileType::Json
+    }
+}
+
+#[derive(Debug)]
+struct YamlFile {
+    data: Vec<u8>,
+}
+
+impl MyFile for YamlFile {
+    fn new() -> Self {
+        YamlFile { data: Vec::new() }
+    }
+
+    fn read_file(&mut self, path: &str) -> Result<(), std::io::Error> {
+        let mut file = std::fs::File::open(path)?;
+        let mut data = Vec::new();
+        file.read_to_end(&mut data)?;
+        self.data = data;
+        Ok(())
+    }
+
+    fn data(&self) -> Vec<u8> {
+        self.data.clone()
+    }
+
+    fn parsed_data(&self) -> Result<ParsedData, std::io::Error> {
+        let data = serde_yaml::from_slice(&self.data).map_err(|err| {
+            std::io::Error::new(
+                std::io::ErrorKind::InvalidData,
+                format!("Error parsing yaml: {err}"),
+            )
+        })?;
+        Ok(ParsedData::Yaml(data))
+    }
+
+    fn file_type(&self) -> FileType {
+        FileType::Yaml
+    }
+}
