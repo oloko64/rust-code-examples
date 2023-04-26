@@ -3,7 +3,7 @@ use sqlx::SqlitePool;
 use crate::{ApiError, NewUser, User};
 
 pub async fn new_user(conn_pool: &SqlitePool, user: NewUser) -> Result<String, ApiError> {
-    sqlx::query!("INSERT INTO users (name) VALUES (?)", user.name)
+    sqlx::query!("INSERT INTO users (name, email) VALUES (?, ?)", user.name, user.email)
         .execute(conn_pool)
         .await
         .map_err(|err| ApiError {

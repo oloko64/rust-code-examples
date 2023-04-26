@@ -1,4 +1,3 @@
-mod arg_parser;
 mod queries;
 
 use axum::{
