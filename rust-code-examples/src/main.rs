@@ -1,4 +1,3 @@
-use std::{cell::RefCell, collections::HashSet, ptr, rc::Rc, thread, time::Duration};
 mod command_piped;
 mod concurrency;
 mod conditional_compilation;
@@ -9,6 +8,15 @@ mod new_type;
 mod singleton;
 mod traits;
 mod utils;
+mod conversions;
+mod hashmaps;
+mod lifetimes;
+mod parallelism;
+mod random;
+mod types;
+mod state_machine
+
+use std::{cell::RefCell, collections::HashSet, ptr, rc::Rc, thread, time::Duration};
 use rayon::prelude::*;
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
@@ -20,12 +28,6 @@ use crate::{
     },
     traits::test_trait,
 };
-mod conversions;
-mod hashmaps;
-mod lifetimes;
-mod parallelism;
-mod random;
-mod types;
 
 struct Car {
     name: String,
