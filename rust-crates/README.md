@@ -14,6 +14,7 @@
 
 - [md5](https://crates.io/crates/md5) -> The package provides the MD5 hash function.
 - [sha2](https://crates.io/crates/sha2) -> Pure Rust implementation of the SHA-2 hash function family including SHA-224, SHA-256, SHA-384, and SHA-512.
+- [bcrypt](https://crates.io/crates/bcrypt) -> Easily hash and verify passwords using bcrypt.
 
 # Rust Additions
 
@@ -36,10 +37,15 @@
 - [bitvec](https://crates.io/crates/bitvec) -> Addresses memory by bits, for packed collections and bitfields.
 - [regex](https://crates.io/crates/regex) -> An implementation of regular expressions for Rust. This implementation uses finite automata and guarantees linear time matching on all inputs.
 - [lazy-regex](https://crates.io/crates/lazy-regex) -> lazy static regular expressions checked at compile time.
+- [fancy-regex](https://crates.io/crates/fancy-regex) -> An implementation of regexes, supporting a relatively rich set of features, including backreferences and look-around.
 - [confy](https://crates.io/crates/confy) -> Boilerplate-free configuration management.
 - [nuttype](https://crates.io/crates/nutype) -> The newtype with guarantees.
 - [toml](https://crates.io/crates/toml) -> A native Rust encoder and decoder of TOML-formatted files and streams. Provides implementations of the standard Serialize/Deserialize traits for TOML data to facilitate deserializing and serializing Rust structures.
 - [bstr](https://crates.io/crates/bstr) -> A string type that is not required to be valid UTF-8.
+- [flate2](https://crates.io/crates/flate2) -> DEFLATE compression and decompression exposed as Read/BufRead/Write streams. Supports miniz_oxide and multiple zlib implementations. Supports zlib, gzip, and raw deflate streams.
+- [arboard](https://crates.io/crates/arboard) -> Image and text handling for the OS clipboard.
+- [lopdf](https://crates.io/crates/lopdf) -> A Rust library for PDF document manipulation.
+- [console](https://crates.io/crates/console) -> A terminal and console abstraction for Rust.
 
 # System
 
@@ -96,6 +102,7 @@
 - [poem-openapi](https://crates.io/crates/poem-openapi) -> OpenAPI support for Poem.
 - [fantoccini](https://crates.io/crates/fantoccini) -> High-level API for programmatically interacting with web pages through WebDriver.
 - [mockito](https://crates.io/crates/mockito) -> HTTP mocking for Rust.
+- [mockall](https://crates.io/crates/mockall) -> A powerful mock object library for Rust.
 - [scraper](https://crates.io/crates/scraper) -> HTML parsing and querying with CSS selectors.
 
 # TUI
@@ -106,6 +113,7 @@
 
 - [egui](https://crates.io/crates/egui) -> An easy-to-use immediate mode GUI that runs on both web and native.
 - [eframe](https://crates.io/crates/eframe) -> egui framework - write GUI apps that compiles to web and/or natively.
+- [rfd](https://crates.io/crates/rfd) -> Rusty File Dialogs is a cross platform Rust library for using native file open/save dialogs. It provides both asynchronous and synchronous APIs.
 
 # Appearance
 
@@ -127,6 +135,7 @@
 - [fast_qr](https://crates.io/crates/fast_qr) -> Generates optimized QRCode.
 - [qrcode-generator](https://crates.io/crates/qrcode-generator) -> Generate QR Code matrices and images in RAW, PNG and SVG formats.
 - [qrcodegen](https://crates.io/crates/qrcodegen) -> High-quality QR Code generator library.
+- [bardecoder](https://crates.io/crates/bardecoder) -> Detect and decode QR Codes.
 
 # User interaction
 
