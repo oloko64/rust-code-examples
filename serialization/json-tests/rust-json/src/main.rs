@@ -1,9 +1,25 @@
+mod json_rpc;
+
+use serde::{Deserialize, Serialize};
 use std::fs::read_to_string;
 
-use serde::{Serialize, Deserialize};
+use crate::json_rpc::JsonRpcRequest;
 
+use serde_json;
 
-extern crate serde_json;
+// Test the serialization and deserialization using serde_json.
+fn main() {
+    let file = read_to_string("../test.json").expect("Error reading file");
+    let teste: Teste = serde_json::from_str(&file).expect("Error converting file");
+    println!("{:#?}", teste);
+
+    let named =
+        r#"{"jsonrpc": "2.0", "method": "hello", "params": {"hello": "test", "value": 42 }}"#;
+    let positional = r#"{"jsonrpc": "2.0", "method": "hello_2", "params": ["test", 42]}"#;
+
+    dbg!(serde_json::from_str::<JsonRpcRequest>(named).unwrap());
+    dbg!(serde_json::from_str::<JsonRpcRequest>(positional).unwrap());
+}
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Teste {
@@ -23,11 +39,4 @@ pub struct Product {
 
     #[serde(rename = "description")]
     description: String,
-}
-
-// Test the serialization and deserialization using serde_json.
-fn main() {
-    let file = read_to_string("../test.json").expect("Error reading file");
-    let teste: Teste = serde_json::from_str(&file).expect("Error converting file");
-    println!("{:#?}", teste);
 }
