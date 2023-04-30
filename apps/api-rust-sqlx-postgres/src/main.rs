@@ -48,30 +48,23 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct ApiError {
-    error: String,
-}
-
-impl ApiError {
-    #[must_use]
-    pub fn new<T>(error: T) -> Self
-    where
-        T: Into<String>,
-    {
-        Self {
-            error: error.into(),
-        }
-    }
+pub enum ApiError {
+    InternalServerError { error: String },
+    BadRequest { error: String },
 }
 
 impl IntoResponse for ApiError {
     fn into_response(self) -> Response {
-        error!("{}", self.error);
-        (
-            StatusCode::INTERNAL_SERVER_ERROR,
-            Json(String::from("Internal Server Error")),
-        )
-            .into_response()
+        match self {
+            ApiError::InternalServerError { error } => {
+                error!("{}", error);
+                (StatusCode::BAD_REQUEST, Json(error)).into_response()
+            }
+            ApiError::BadRequest { error } => {
+                error!("{}", error);
+                (StatusCode::INTERNAL_SERVER_ERROR, Json(error)).into_response()
+            }
+        }
     }
 }
 

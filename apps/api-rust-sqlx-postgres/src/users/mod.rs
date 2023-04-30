@@ -24,7 +24,9 @@ where
     T: ApplicationState,
 {
     let hashed_password =
-        hash(user.password, DEFAULT_COST).map_err(|err| ApiError::new(err.to_string()))?;
+        hash(user.password, DEFAULT_COST).map_err(|err| ApiError::InternalServerError {
+            error: err.to_string(),
+        })?;
     let query = sqlx::query_as!(
         UserDatabase,
         "INSERT INTO users (name, email, password, active) VALUES ($1, $2, $3, $4) RETURNING id, name, email, password, active, created_at, updated_at",
@@ -35,7 +37,9 @@ where
     )
     .fetch_one(pool.get_pg_pool_ref())
     .await.map_err(|err| {
-        ApiError::new(err.to_string())
+        ApiError::InternalServerError {
+            error: err.to_string(),
+        }
     })?;
 
     let user = User {
@@ -65,7 +69,9 @@ where
     )
     .fetch_one(pool.get_pg_pool_ref())
     .await
-    .map_err(|err| ApiError::new(err.to_string()))?;
+    .map_err(|err| ApiError::InternalServerError {
+        error: err.to_string(),
+    })?;
 
     let user = User {
         id: Some(query.id),
@@ -90,7 +96,9 @@ where
     )
     .fetch_all(pool.get_pg_pool_ref())
     .await
-    .map_err(|err| ApiError::new(err.to_string()))?;
+    .map_err(|err| ApiError::InternalServerError {
+        error: err.to_string(),
+    })?;
 
     let users = query
         .into_iter()
@@ -117,7 +125,9 @@ where
     T: ApplicationState,
 {
     let hashed_password =
-        hash(user.password, DEFAULT_COST).map_err(|err| ApiError::new(err.to_string()))?;
+        hash(user.password, DEFAULT_COST).map_err(|err| ApiError::InternalServerError {
+            error: err.to_string(),
+        })?;
     let now = OffsetDateTime::now_utc();
     let current_time = PrimitiveDateTime::new(now.date(), now.time());
     let query = sqlx::query_as!(
@@ -132,7 +142,7 @@ where
     )
     .fetch_one(pool.get_pg_pool_ref())
     .await.map_err(|err| {
-        ApiError::new(err.to_string())
+        ApiError::InternalServerError { error: err.to_string() }
     })?;
 
     let user = User {
@@ -158,7 +168,9 @@ where
     sqlx::query!("DELETE FROM users WHERE id = $1", params.id)
         .execute(pool.get_pg_pool_ref())
         .await
-        .map_err(|err| ApiError::new(err.to_string()))?;
+        .map_err(|err| ApiError::InternalServerError {
+            error: err.to_string(),
+        })?;
 
     Ok(StatusCode::OK)
 }
