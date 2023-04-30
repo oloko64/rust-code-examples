@@ -184,7 +184,7 @@ pub struct User {
     email: String,
     password: String,
 
-    #[serde(skip_deserializing)]
+    #[serde(skip_deserializing, default = "active_default")]
     active: bool,
 
     #[serde(skip_deserializing)]
@@ -203,4 +203,8 @@ impl User {
 #[derive(Debug, Deserialize)]
 pub struct Params {
     id: i32,
+}
+
+fn active_default() -> bool {
+    true
 }
