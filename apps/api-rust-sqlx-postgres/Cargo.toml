@@ -1,0 +1,27 @@
+[package]
+name = "api-postgres"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.release]
+lto = true
+strip = true
+codegen-units = 1
+
+[dependencies]
+# https://github.com/tokio-rs/tracing/issues/2565
+# regex = { version = "1.8.1", features = ["unicode-case"] }
+
+axum = "0.6.17"
+hyper = "0.14.26"
+serde = { version = "1.0.160", features = ["derive"] }
+serde_json = "1.0.96"
+tokio = { version = "1.28.0", features = ["macros", "rt-multi-thread", "fs"] }
+tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
+tracing = "0.1.37"
+sqlx = { version = "0.6.3", features = ["runtime-tokio-rustls", "postgres", "time"] }
+dotenvy = "0.15.7"
+time = { version = "0.3.20", features = ["macros"] }
+bcrypt = "0.14.0"
