@@ -14,3 +14,6 @@ futures = "0.3.27"
 tokio = { version = "1.26.0", features = ["full"] }
 reqwest = "0.11.15"
 serde_yaml = "0.9.21"
+mockito = "1.0.2"
+mockall = "0.11.4"
+async-trait = "0.1.68"

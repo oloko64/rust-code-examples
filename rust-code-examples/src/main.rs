@@ -14,7 +14,8 @@ mod lifetimes;
 mod parallelism;
 mod random;
 mod types;
-mod state_machine
+mod state_machine;
+mod mocks;
 
 use std::{cell::RefCell, collections::HashSet, ptr, rc::Rc, thread, time::Duration};
 use rayon::prelude::*;
