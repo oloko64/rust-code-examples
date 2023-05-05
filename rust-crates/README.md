@@ -9,6 +9,7 @@
 - [tokio](https://crates.io/crates/tokio) -> An event-driven, non-blocking I/O platform for writing asynchronous I/O backed applications.
 - [crossbeam](https://crates.io/crates/crossbeam) -> This crate provides a set of tools for concurrent programming.
 - [flume](https://crates.io/crates/flume) -> A blazingly fast multi-producer channel.
+- [async-trait](https://crates.io/crates/async-trait) -> Type erasure for async trait methods.
 
 # Hash
 
@@ -103,6 +104,7 @@
 - [fantoccini](https://crates.io/crates/fantoccini) -> High-level API for programmatically interacting with web pages through WebDriver.
 - [mockito](https://crates.io/crates/mockito) -> HTTP mocking for Rust.
 - [mockall](https://crates.io/crates/mockall) -> A powerful mock object library for Rust.
+- [mockall_double](https://crates.io/crates/mockall_double) -> Test double adapter for Mockall.
 - [scraper](https://crates.io/crates/scraper) -> HTML parsing and querying with CSS selectors.
 
 # TUI
