@@ -1,6 +1,6 @@
 use std::{
     sync::{Arc, Mutex},
-    thread,
+    thread, time::Instant,
 };
 
 /// A example of various thread implementations.
@@ -49,4 +49,40 @@ fn arcs_mutex() {
     for handle in handles {
         handle.join().unwrap();
     }
+}
+
+// -----------------------------------------------------------------------------
+
+pub fn receiver_example() {
+    let vec = Arc::new(Mutex::new(Vec::new()));
+    let av_parallel = thread::available_parallelism().unwrap();
+    let (tx, rx) = std::sync::mpsc::channel();
+
+    let start_time = Instant::now();
+
+    let vec_clone = Arc::clone(&vec);
+    let thread = thread::spawn(move || {
+        for i in 0..10 {
+            vec_clone.lock().unwrap().push(i);
+            tx.send(i).unwrap();
+        }
+    });
+
+    let vec_clone_2 = Arc::clone(&vec);
+    let thread_2 = thread::spawn(move || {
+        // for i in 0..1_000_000 {
+        //     vec_clone_2.lock().unwrap().push(i);
+        // }
+        while let Ok(i) = rx.recv() {
+            vec_clone_2.lock().unwrap().push(i + 100);
+        }
+    });
+
+    thread.join().unwrap();
+    thread_2.join().unwrap();
+
+    println!("Time: {}ms", start_time.elapsed().as_millis());
+    println!("Vec size {}", vec.lock().unwrap().len());
+    println!("Available parallelism {}", av_parallel);
+    println!("Vec: {:?}", vec.lock().unwrap());
 }
