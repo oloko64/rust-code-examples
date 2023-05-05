@@ -1,6 +1,7 @@
 use std::{
     sync::{Arc, Mutex},
-    thread, time::Instant,
+    thread,
+    time::Instant,
 };
 
 /// A example of various thread implementations.

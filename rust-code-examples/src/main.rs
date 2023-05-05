@@ -1,24 +1,24 @@
 mod command_piped;
 mod concurrency;
 mod conditional_compilation;
+mod conversions;
 mod data_types;
+mod hashmaps;
 mod into_from;
+mod lifetimes;
+mod mocks;
 mod multiple_tokio_worker_types;
 mod new_type;
-mod singleton;
-mod traits;
-mod utils;
-mod conversions;
-mod hashmaps;
-mod lifetimes;
 mod parallelism;
 mod random;
-mod types;
+mod singleton;
 mod state_machine;
-mod mocks;
+mod traits;
+mod types;
+mod utils;
 
-use std::{cell::RefCell, collections::HashSet, ptr, rc::Rc, thread, time::Duration};
 use rayon::prelude::*;
+use std::{cell::RefCell, collections::HashSet, ptr, rc::Rc, thread, time::Duration};
 use types::User;
 use unicode_segmentation::UnicodeSegmentation;
 

@@ -11,7 +11,7 @@ enum Power {
     Feather,
     Fire,
     Mushroom,
-    Star
+    Star,
 }
 
 struct Mario {
@@ -45,7 +45,9 @@ impl Mario {
 
     fn take_damage(&mut self) {
         match self.state {
-            State::Mario => { println!("Game Over"); }
+            State::Mario => {
+                println!("Game Over");
+            }
             State::SuperMario => self.state = State::Mario,
             State::FireMario => self.state = State::SuperMario,
             State::CapeMario => self.state = State::SuperMario,
@@ -73,7 +75,6 @@ pub fn run_game_states() {
 
     player.take_damage();
 }
-
 
 #[cfg(test)]
 mod tests {
