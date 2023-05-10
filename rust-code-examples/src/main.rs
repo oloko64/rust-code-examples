@@ -13,7 +13,7 @@ mod parallelism;
 mod random;
 mod singleton;
 mod state_machine;
-mod traits;
+mod trait_examples;
 mod types;
 mod utils;
 
@@ -27,7 +27,7 @@ use crate::{
         important_num_consumer, important_num_consumer_new_type, important_num_generator,
         important_num_generator_new_type,
     },
-    traits::test_trait,
+    trait_examples::traits::test_trait,
 };
 
 struct Car {
