@@ -1,0 +1,15 @@
+[package]
+name = "mp4-length"
+version = "0.1.100"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.release]
+lto = true
+strip = true
+codegen-units = 1
+
+[dependencies]
+clap = { version = "4.3.0", features = ["derive"] }
+hex = "0.4.3"
