@@ -20,6 +20,7 @@
 # Rust Additions
 
 - [libc](https://crates.io/crates/libc) -> Raw FFI bindings to platform libraries like libc.
+- [num](https://crates.io/crates/num)-> A collection of numeric types and traits for Rust, including bigint, complex, rational, range iterators, generic integers, and more.
 - [memmap2](https://crates.io/crates/memmap2) -> Cross-platform Rust API for memory-mapped file IO.
 - [byteflags](https://crates.io/crates/bitflags) -> A macro to generate structures which behave like bitflags.
 - [bytemuck](https://crates.io/crates/bytemuck) -> A crate for mucking around with piles of bytes.
@@ -47,7 +48,8 @@
 - [arboard](https://crates.io/crates/arboard) -> Image and text handling for the OS clipboard.
 - [lopdf](https://crates.io/crates/lopdf) -> A Rust library for PDF document manipulation.
 - [console](https://crates.io/crates/console) -> A terminal and console abstraction for Rust.
-
+- [ctrlc](https://crates.io/crates/ctrlc) -> Easy Ctrl-C handler for Rust projects.
+- [strsim](https://crates.io/crates/strsim) -> Implementations of string similarity metrics.
 # System
 
 - [tempfile](https://crates.io/crates/tempfile) -> A library for managing temporary files and directories.
@@ -75,6 +77,7 @@
 - [tar](https://crates.io/crates/tar) -> A Rust implementation of a TAR file reader and writer. This library does not currently handle compression, but it is abstract over all I/O readers and writers. Additionally, great lengths are taken to ensure that the entire contents are never required to be entirely resident in memory all at once.
 - [flate2](https://crates.io/crates/flate2) -> DEFLATE compression and decompression exposed as Read/BufRead/Write streams. Supports miniz_oxide and multiple zlib implementations. Supports zlib, gzip, and raw deflate streams.
 - [signal-hook](https://crates.io/crates/signal-hook) -> Unix signal handling.
+- [dlopen](https://crates.io/crates/dlopen) -> Library for opening and operating on dynamic link libraries (also known as shared objects or shared libraries). 
 
 # Databases
 
