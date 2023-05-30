@@ -7,7 +7,7 @@ use axum::{
 };
 use hyper::StatusCode;
 use serde::{Deserialize, Serialize};
-use sqlx::postgres::PgPool;
+use sqlx::postgres::{PgPool, PgPoolOptions};
 use std::net::SocketAddr;
 use tracing::{error, info};
 use tracing_subscriber::{
@@ -26,7 +26,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let database_url = std::env::var("DATABASE_URL")?;
     let state = AppState {
-        pool: PgPool::connect(&database_url).await?,
+        pool: PgPoolOptions::new()
+            .max_connections(5)
+            .connect(&database_url)
+            .await?,
     };
 
     let app = Router::new()
