@@ -6,6 +6,7 @@ mod data_types;
 mod hashmaps;
 mod into_from;
 mod lifetimes;
+mod memoization;
 mod mocks;
 mod multiple_tokio_worker_types;
 mod new_type;
