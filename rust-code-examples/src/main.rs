@@ -3,6 +3,7 @@ mod concurrency;
 mod conditional_compilation;
 mod conversions;
 mod data_types;
+mod ext_iterators;
 mod hashmaps;
 mod into_from;
 mod lifetimes;
