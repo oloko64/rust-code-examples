@@ -1178,6 +1178,7 @@ dependencies = [
  "futures",
  "mockall",
  "mockito",
+ "rand",
  "rayon",
  "reqwest",
  "serde",
