@@ -18,6 +18,7 @@ mod state_machine;
 mod trait_examples;
 mod types;
 mod utils;
+mod error_examples;
 
 use rayon::prelude::*;
 use std::{cell::RefCell, collections::HashSet, ptr, rc::Rc, thread, time::Duration};
