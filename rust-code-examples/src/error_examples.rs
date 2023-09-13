@@ -25,6 +25,17 @@ impl std::fmt::Display for MyError {
 
 impl std::error::Error for MyError {}
 
+// -----------------------------------------------------------------------------------------
+
+// This is the same as all the code above
+// #[derive(Debug, thiserror::Error)]
+// enum MyError {
+//     #[error("Error: {0}")]
+//     Error1(String),
+//     #[error("Error: {0}")]
+//     Error2(#[from] std::io::Error)
+// }
+
 fn read_file() -> Result<String, MyError> {
     let mut file = std::fs::File::open("test.txt")?;
     let mut contents = String::new();
