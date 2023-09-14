@@ -38,28 +38,26 @@ fn cpu_threads(mut cx: FunctionContext) -> JsResult<JsNumber> {
 
 fn multi_thread(mut cx: FunctionContext) -> JsResult<JsUndefined> {
     std::thread::scope(|s| {
-        s.spawn(|| {
-            for i in 0..3 {
-                println!("thread 1: {i}");
-                std::thread::sleep(std::time::Duration::from_millis(1000));
-            }
-            println!("thread id: {:?}", std::thread::current().id());
+        let expensive_operation = || {
+            let now = std::time::Instant::now();
+            while now.elapsed().as_secs() < 5 {}
+
+            println!(
+                "Expansive operation done on thread {:?}",
+                std::thread::current().id()
+            );
+        };
+
+        s.spawn(move || {
+            expensive_operation();
         });
 
-        s.spawn(|| {
-            for i in 0..3 {
-                println!("thread 2: {i}");
-                std::thread::sleep(std::time::Duration::from_millis(1000));
-            }
-            println!("thread id: {:?}", std::thread::current().id());
+        s.spawn(move || {
+            expensive_operation();
         });
 
-        s.spawn(|| {
-            for i in 0..3 {
-                println!("thread 3: {i}");
-                std::thread::sleep(std::time::Duration::from_millis(1000));
-            }
-            println!("thread id: {:?}", std::thread::current().id());
+        s.spawn(move || {
+            expensive_operation();
         });
     });
 

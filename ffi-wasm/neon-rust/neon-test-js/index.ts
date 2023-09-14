@@ -1,4 +1,6 @@
-const { fibonacci, cpu_threads, multi_thread, js_functions } = require('../index.node');
+// import { createRequire } from 'node:module';
+// const require = createRequire(import.meta.url);
+const { fibonacci,cpu_threads, js_functions, multi_thread } = require("../index.node");
 
 console.time('fibonacci-rust');
 console.log(fibonacci(200));
