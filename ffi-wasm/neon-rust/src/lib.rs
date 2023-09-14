@@ -36,11 +36,53 @@ fn cpu_threads(mut cx: FunctionContext) -> JsResult<JsNumber> {
     Ok(result)
 }
 
+fn multi_thread(mut cx: FunctionContext) -> JsResult<JsUndefined> {
+    std::thread::scope(|s| {
+        s.spawn(|| {
+            for i in 0..3 {
+                println!("thread 1: {i}");
+                std::thread::sleep(std::time::Duration::from_millis(1000));
+            }
+            println!("thread id: {:?}", std::thread::current().id());
+        });
+
+        s.spawn(|| {
+            for i in 0..3 {
+                println!("thread 2: {i}");
+                std::thread::sleep(std::time::Duration::from_millis(1000));
+            }
+            println!("thread id: {:?}", std::thread::current().id());
+        });
+
+        s.spawn(|| {
+            for i in 0..3 {
+                println!("thread 3: {i}");
+                std::thread::sleep(std::time::Duration::from_millis(1000));
+            }
+            println!("thread id: {:?}", std::thread::current().id());
+        });
+    });
+
+    Ok(cx.undefined())
+}
+
+fn js_functions(mut cx: FunctionContext) -> JsResult<JsNumber> {
+    let parse_int: Handle<JsFunction> = cx.global().get(&mut cx, "parseInt")?;
+    let result: Handle<JsNumber> = parse_int
+        .call_with(&mut cx)
+        .arg(cx.string("42sss"))
+        .apply(&mut cx)?;
+
+    Ok(result)
+}
+
 #[neon::main]
 fn main(mut cx: ModuleContext) -> NeonResult<()> {
     cx.export_function("hello", hello)?;
     cx.export_function("fibonacci", fibonacci)?;
     cx.export_function("cpu_threads", cpu_threads)?;
+    cx.export_function("multi_thread", multi_thread)?;
+    cx.export_function("js_functions", js_functions)?;
 
     Ok(())
 }

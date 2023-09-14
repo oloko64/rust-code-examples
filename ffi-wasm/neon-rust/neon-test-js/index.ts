@@ -1,16 +1,20 @@
-const lib = require('../index.node');
+const { fibonacci, cpu_threads, multi_thread, js_functions } = require('../index.node');
 
 console.time('fibonacci-rust');
-console.log(lib.fibonacci(200));
+console.log(fibonacci(200));
 console.timeEnd('fibonacci-rust');
 
 console.time('fibonacci-js');
-console.log(fibonacci(200));
+console.log(fibonacciJs(200));
 console.timeEnd('fibonacci-js');
 
-console.log('cpu threads', lib.cpu_threads());
+console.log('cpu threads', cpu_threads());
 
-function fibonacci(num: number): { result: number } {
+multi_thread();
+
+console.log('parseInt from Rust: ', js_functions());
+
+function fibonacciJs(num: number): { result: number } {
     if (num < 2) {
         return {result: num};
     }
