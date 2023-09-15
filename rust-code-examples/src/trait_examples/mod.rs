@@ -6,3 +6,4 @@ pub mod object_safe_traits;
 pub mod operator_overloading;
 pub mod trait_constraints;
 pub mod traits;
+pub mod extend_unwrap;
