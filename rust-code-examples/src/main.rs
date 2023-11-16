@@ -1,8 +1,10 @@
+mod box_leak;
 mod command_piped;
 mod concurrency;
 mod conditional_compilation;
 mod conversions;
 mod data_types;
+mod error_examples;
 mod ext_iterators;
 mod hashmaps;
 mod into_from;
@@ -18,7 +20,6 @@ mod state_machine;
 mod trait_examples;
 mod types;
 mod utils;
-mod error_examples;
 
 use rayon::prelude::*;
 use std::{cell::RefCell, collections::HashSet, ptr, rc::Rc, thread, time::Duration};
