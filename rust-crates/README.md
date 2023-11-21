@@ -1,6 +1,8 @@
 # Links
 
 - [blessed.rs](https://blessed.rs/crates) -> An unofficial guide to the Rust ecosystem.
+- [AWS-SDKs](https://github.com/awslabs/aws-sdk-rust) -> This repo contains the new AWS SDK for Rust (the SDK).
+- [Reddit Thread](https://www.reddit.com/r/rust/comments/17zxyku/what_are_the_rust_crates_you_use_in_almost_every/) -> Some useful recommendations.
 
 # Concurrency/Futures
 
@@ -16,6 +18,9 @@
 - [md5](https://crates.io/crates/md5) -> The package provides the MD5 hash function.
 - [sha2](https://crates.io/crates/sha2) -> Pure Rust implementation of the SHA-2 hash function family including SHA-224, SHA-256, SHA-384, and SHA-512.
 - [bcrypt](https://crates.io/crates/bcrypt) -> Easily hash and verify passwords using bcrypt.
+- [crc](https://crates.io/crates/crc) -> Rust implementation of CRC with support of various standards.
+- [xxhash-rust](https://crates.io/crates/xxhash-rust) -> Implementation of xxhash.
+- [rustc-hash](https://crates.io/crates/rustc-hash) -> speed, non-cryptographic hash used in rustc, FxHashMap.
 
 # Rust Additions
 
@@ -50,6 +55,12 @@
 - [console](https://crates.io/crates/console) -> A terminal and console abstraction for Rust.
 - [ctrlc](https://crates.io/crates/ctrlc) -> Easy Ctrl-C handler for Rust projects.
 - [strsim](https://crates.io/crates/strsim) -> Implementations of string similarity metrics.
+- [polars](https://crates.io/crates/polars) -> DataFrame Library based on Apache Arrow.
+- [strum](https://crates.io/crates/strum) -> Helpful macros for working with enums and strings.
+- [ndarray](https://crates.io/crates/ndarray) -> An n-dimensional array for general elements and for numerics. Lightweight array views and slicing, views support chunking and splitting.
+- [dashmap](https://crates.io/crates/dashmap) -> Blazing fast concurrent HashMap for Rust.
+- [bumpalo](https://crates.io/crates/bumpalo) -> A fast bump allocation arena for Rust.
+- [validator](https://crates.io/crates/validator) -> Common validation functions (email, url, length, ...) and trait - to be used with `validator_derive`.
 # System
 
 - [tempfile](https://crates.io/crates/tempfile) -> A library for managing temporary files and directories.
@@ -69,6 +80,7 @@
 - [globwalk](https://crates.io/crates/globwalk) -> Glob-matched recursive file system walking.
 - [glob](https://crates.io/crates/glob) -> Support for matching file paths against Unix shell style patterns.
 - [walkdir](https://crates.io/crates/walkdir) -> Recursively walk a directory.
+- [wax](https://crates.io/crates/wax) -> Opinionated and portable globs that can be matched against paths and directory trees.
 - [rand](https://crates.io/crates/rand) -> Random number generators and other randomness functionality.
 - [getrandom](https://crates.io/crates/getrandom) -> A small cross-platform library for retrieving random data from system source.
 - [unicode-segmentation](https://crates.io/crates/unicode-segmentation) -> This crate provides Grapheme Cluster, Word and Sentence boundaries according to Unicode Standard Annex #29 rules.
@@ -109,6 +121,8 @@
 - [mockall](https://crates.io/crates/mockall) -> A powerful mock object library for Rust.
 - [mockall_double](https://crates.io/crates/mockall_double) -> Test double adapter for Mockall.
 - [scraper](https://crates.io/crates/scraper) -> HTML parsing and querying with CSS selectors.
+- [aws-sdk-s3](https://crates.io/crates/aws-sdk-s3) -> AWS SDK for Amazon Simple Storage Service.
+- [aws-config](https://crates.io/crates/aws-config) -> AWS SDK config and credential provider implementations.
 
 # TUI
 
@@ -128,7 +142,9 @@
 - [colorful](https://crates.io/crates/colorful) -> Make your terminal output colorful.
 - [comfy-table](https://crates.io/crates/comfy-table) -> An easy to use library for building beautiful tables with automatic content wrapping.
 - [prettytable-rs](https://crates.io/crates/prettytable-rs) -> A library for printing pretty formatted tables in terminal.
+- [tabled](https://crates.io/crates/tabled) -> An easy to use library for pretty print tables of Rust structs and enums.
 - [termion](https://crates.io/crates/termion) -> A bindless library for manipulating terminals.
+- [pretty_assertions](https://crates.io/crates/pretty_assertions) -> Overwrite `assert_eq!` and `assert_ne!` with drop-in replacements, adding colorful diffs.
 
 # Serialization
 
@@ -158,6 +174,7 @@
 - [log](https://crates.io/crates/log) -> A lightweight logging facade for Rust.
 - [tracing](https://crates.io/crates/tracing) -> Application-level tracing for Rust, good for async implementations.
 - [tracing-subscriber](https://crates.io/crates/tracing-subscriber) -> Utilities for implementing and composing `tracing` subscribers.
+- [tracing-appender](https://crates.io/crates/tracing-appender) -> Provides utilities for file appenders and making non-blocking writers.
 - [env_logger](https://crates.io/crates/env_logger) -> A logging implementation for `log` which is configured via an environment variable.
 - [simple_logger](https://crates.io/crates/simple_logger) -> A logger that prints all messages with a readable output format.
 - [simplelog](https://crates.io/crates/simplelog) -> A simple and easy-to-use logging facility for Rust's log crate.
