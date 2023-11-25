@@ -17,6 +17,7 @@ mod parallelism;
 mod random;
 mod singleton;
 mod state_machine;
+mod string_padding;
 mod trait_examples;
 mod types;
 mod utils;
