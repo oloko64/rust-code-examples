@@ -6,6 +6,7 @@ mod conversions;
 mod data_types;
 mod error_examples;
 mod ext_iterators;
+mod file_manipulation;
 mod hashmaps;
 mod into_from;
 mod lifetimes;
