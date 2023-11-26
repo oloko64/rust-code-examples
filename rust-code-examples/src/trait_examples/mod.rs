@@ -6,5 +6,6 @@ pub mod generic_traits;
 pub mod high_trait_bounds;
 pub mod object_safe_traits;
 pub mod operator_overloading;
+pub mod phantom_data;
 pub mod trait_constraints;
 pub mod traits;
