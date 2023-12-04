@@ -1,4 +1,5 @@
 mod box_leak;
+mod channels;
 mod command_piped;
 mod concurrency;
 mod conditional_compilation;
