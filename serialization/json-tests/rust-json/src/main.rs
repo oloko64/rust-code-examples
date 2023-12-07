@@ -1,4 +1,5 @@
 mod json_rpc;
+mod try_from;
 
 use serde::{Deserialize, Serialize};
 use std::fs::read_to_string;
