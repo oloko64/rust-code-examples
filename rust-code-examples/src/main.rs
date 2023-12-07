@@ -22,6 +22,7 @@ mod singleton;
 mod state_machine;
 mod string_padding;
 mod trait_examples;
+mod type_state;
 mod types;
 mod utils;
 
