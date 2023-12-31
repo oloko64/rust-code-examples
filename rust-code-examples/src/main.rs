@@ -1,4 +1,5 @@
 mod any;
+mod async_iterator;
 mod box_leak;
 mod channels;
 mod command_piped;
