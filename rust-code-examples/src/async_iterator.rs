@@ -86,3 +86,23 @@ async fn foo(time: Duration, n: usize) -> usize {
 
     n
 }
+
+async fn use_of_fuse() {
+    // fuse a future to not poll it after it completes
+    let cancel = tokio::time::sleep(Duration::from_secs(1)).fuse();
+    tokio::pin!(cancel);
+
+    let foo = foo(Duration::from_secs(5), 5);
+    tokio::pin!(foo);
+
+    loop {
+        tokio::select! {
+            _ = &mut foo => {
+                println!("func completed");
+                break;
+            },
+            // if we do not fuse it, we would see a lot of `func timeout` on the terminal after the first completion
+            _ = &mut cancel => println!("func timeout"),
+        }
+    }
+}
