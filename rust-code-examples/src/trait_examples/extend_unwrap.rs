@@ -21,3 +21,24 @@ where
         }
     }
 }
+
+// Another implementation
+
+trait CustomPrint<T, E> {
+    fn unwrap_or_print(self, msg: &str) -> T;
+}
+
+impl<T, E> CustomPrint<T, E> for Result<T, E>
+where
+    E: std::fmt::Debug,
+{
+    fn unwrap_or_print(self, msg: &str) -> T {
+        match self {
+            Ok(val) => val,
+            Err(err) => {
+                println!("{}: {:?}", msg, err);
+                panic!();
+            }
+        }
+    }
+}
