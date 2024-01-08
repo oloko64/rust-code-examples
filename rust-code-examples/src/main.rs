@@ -7,6 +7,7 @@ mod concurrency;
 mod conditional_compilation;
 mod conversions;
 mod data_types;
+mod design_patterns;
 mod enum_dispatch;
 mod error_examples;
 mod ext_iterators;
