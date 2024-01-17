@@ -6,6 +6,7 @@ mod command_piped;
 mod concurrency;
 mod conditional_compilation;
 mod conversions;
+mod cow;
 mod data_types;
 mod design_patterns;
 mod enum_dispatch;
