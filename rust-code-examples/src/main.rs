@@ -19,6 +19,7 @@ mod lifetimes;
 mod memoization;
 mod mocks;
 mod multiple_tokio_worker_types;
+mod net;
 mod new_type;
 mod parallelism;
 mod random;
