@@ -15,7 +15,7 @@ fn App<G: Html>(cx: Scope) -> View<G> {
 
     view! {
         cx,
-        div {
+        div(class="container") {
             h1 {
                 "Hello "
                 (displayed_name())
