@@ -5,6 +5,8 @@ fn App() -> impl IntoView {
     let (count, set_count) = create_signal(0);
 
     view! {
+        class="container",
+        <p>COUNTER:</p>
         <button class="one"
             on:click=move |_| {
                 let val = ReadSignal::get(&count);
