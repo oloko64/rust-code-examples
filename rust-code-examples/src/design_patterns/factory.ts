@@ -1,12 +1,16 @@
 // factory pattern
 
 class Burger {
-    name: string;
-    price: number;
-    calories: number;
-}
+    private name: string;
+    private price: number;
+    private calories: number;
 
-class BurgerFactory {
+    constructor() {
+        this.name = "";
+        this.price = 0;
+        this.calories = 0;
+    }
+
     private createBurger(name: string, price: number, calories: number) {
         const burger = new Burger();
         burger.name = name;
@@ -28,7 +32,7 @@ class BurgerFactory {
     }
 }
 
-const burgerFactory = new BurgerFactory();
+const burgerFactory = new Burger();
 const cheeseBurger = burgerFactory.createCheeseBurger();
 const chickenBurger = burgerFactory.createChickenBurger();
 const fishBurger = burgerFactory.createFishBurger();

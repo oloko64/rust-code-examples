@@ -1,6 +1,6 @@
 // builder pattern
 
-interface CarBuilder {
+interface ICarBuilder {
     name(name: string): CarBuilder;
     color(color: string): CarBuilder;
     maxSpeed(maxSpeed: number): CarBuilder;
@@ -13,7 +13,7 @@ class Car {
     maxSpeed: number;
 }
 
-class CarBuilder implements CarBuilder {
+class CarBuilder implements ICarBuilder {
     private car: Car;
 
     constructor() {
