@@ -23,6 +23,7 @@ mod net;
 mod new_type;
 mod parallelism;
 mod random;
+mod self_referential;
 mod singleton;
 mod state_machine;
 mod string_padding;
