@@ -16,6 +16,7 @@ mod file_manipulation;
 mod hashmaps;
 mod into_from;
 mod lifetimes;
+mod limited_concurrency;
 mod memoization;
 mod mocks;
 mod multiple_tokio_worker_types;
